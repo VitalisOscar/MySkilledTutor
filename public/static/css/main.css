@@ -1,0 +1,73 @@
+@import 'argon-design-system.min.css';
+@import 'font-awesome.css';
+@import 'nucleo-icons.css';
+
+body{
+    background: #fffaf3;
+}
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+.btn-rounded{
+    border-radius: 50px;
+}
+
+.top-navbar{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.top-navbar .nav-link{
+    color: #172b4d !important;
+    transition: .3s all !important;
+    font-weight: 600;
+    border-radius: 0;
+    padding-top: 1.2rem;
+    padding-bottom: 1.2rem;
+    font-size: 1em;
+}
+
+.top-navbar .nav-link:hover, .top-navbar .nav-link:focus, .top-navbar .nav-link:active{
+    color: #f5365c !important;
+}
+
+.top-navbar .nav-link.active{
+    color: #f5365c !important;
+    border-bottom: 3px solid #f5365c;
+}
+
+
+/* Separator */
+.sep{
+    height: 6px;
+    background: #f5365c;
+    border-radius: 3px;
+    display: block;
+    width: 50px;
+}
+
+.section .section-title{
+    font-weight: 700;
+    color: #333;
+    font-size: 40px;
+}
+
+
+.has-background{
+    position: relative;
+}
+
+.background{
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.foreground{
+    background: rgba(0, 0, 0, .9);
+}
