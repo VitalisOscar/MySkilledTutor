@@ -1,0 +1,124 @@
+/* SINGLE SUMMARY ITEM */
+.summary{
+    position: relative;
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 1.5rem
+}
+
+.summary .link{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    transition: .2s all !important;
+}
+
+.summary:hover .link{
+    background: #0001;
+}
+
+.summary .summary-icon{
+    color: #fff;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #0002;
+}
+
+.summary .summary-count{
+    color: #fff;
+    /* font-size: 35px; */
+    font-weight: 700;
+}
+
+.summary .summary-label{
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+/* Notifications */
+.notification{
+    background: #fff;
+    border-radius: 30px;
+    padding: 1.25rem;
+    position: relative;
+}
+
+.notification:hover .icon{
+    transition: .2s all !important;
+}
+
+.notification:hover .icon{
+    background: coral !important;
+}
+
+.notification:hover .icon{
+    animation: shake .7s;
+    animation-iteration-count: 1;
+}
+
+.notification .link{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 30px;
+    transition: .2s all !important;
+}
+
+.notification:not(:last-child){
+    margin-bottom: 1.5rem;
+}
+
+.notification .notification-title{
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* animation to ring bell */
+@keyframes shake {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(-15deg);
+    }
+    20% {
+        transform: rotate(15deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(15deg);
+    }
+    50% {
+        transform: rotate(-15deg);
+    }
+    60% {
+        transform: rotate(0deg);
+    }
+    70% {
+        transform: rotate(-15deg);
+    }
+    80% {
+        transform: rotate(15deg);
+    }
+    90% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-15deg);
+    }
+}
+

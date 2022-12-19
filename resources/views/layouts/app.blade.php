@@ -23,7 +23,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="top-navbar navbar navbar-expand-md navbar-light bg-white border-bottom">
+        <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <strong>{{ config('app.name') }}</strong>
@@ -42,7 +42,7 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav mx-auto">
                         <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('login') }}">{{ __('Home') }}</a>
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Home') }}</a>
                         </li>
 
                         <li class="nav-item">
@@ -50,11 +50,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('My Orders') }}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Account') }}</a>
+                            <a class="nav-link active" href="{{ route('login') }}">{{ __('Client Area') }}</a>
                         </li>
 
                         <!-- Authentication Links -->

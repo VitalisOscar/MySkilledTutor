@@ -14,9 +14,11 @@ body{
     border-radius: 50px;
 }
 
+/* Light navbar */
 .top-navbar{
     padding-top: 0;
     padding-bottom: 0;
+    background: #fff;
 }
 
 .top-navbar .nav-link{
@@ -36,6 +38,28 @@ body{
 .top-navbar .nav-link.active{
     color: #f5365c !important;
     border-bottom: 3px solid #f5365c;
+}
+
+
+/* Red navbar */
+.top-navbar.solid-color{
+    background: #f5365c;
+}
+
+.top-navbar.solid-color .nav-link{
+    color: #eee !important;
+    font-weight: 600;
+}
+
+.top-navbar.solid-color .nav-link:hover,
+.top-navbar.solid-color .nav-link:focus,
+.top-navbar.solid-color .nav-link:active{
+    color: #fff !important;
+}
+
+.top-navbar.solid-color .nav-link.active{
+    color: #fff !important;
+    border-bottom: 3px solid #fff;
 }
 
 
