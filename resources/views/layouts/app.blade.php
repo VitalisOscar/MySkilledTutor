@@ -22,6 +22,32 @@
     @yield('links')
 </head>
 <body>
+    {{-- If there is a status info or error message, display an alert for it --}}
+    <div class="alert-area px-0 col-lg-4 col-xl-5 col-md-6 mx-auto">
+        @if (session()->has('status'))
+        <div class="alert alert-default mt-3">
+            <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ session()->get('status') }}
+        </div>
+        @endif
+
+        @if ($errors->has('status'))
+        <div class="alert alert-danger mt-3">
+            <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+            {{ $errors->get('status')[0] }}
+        </div>
+        @endif
+
+        {{-- Auto dismiss the alert --}}
+        <script>
+            if(document.querySelector('.alert-area .alert') != null){
+                setTimeout(function(){
+                    document.querySelector('.alert-area .alert .close').click();
+                }, 7000);
+            }
+        </script>
+    </div>
+
     <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
         <div class="container-fluid">
             <a class="navbar-brand" href="{{ url('/') }}">

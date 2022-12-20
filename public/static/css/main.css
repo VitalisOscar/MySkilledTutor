@@ -18,6 +18,14 @@ body{
     height: 60px !important;
 }
 
+.alert-area{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999999;
+}
+
 /* Light navbar */
 .top-navbar{
     padding-top: 0;

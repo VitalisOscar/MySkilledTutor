@@ -4,9 +4,10 @@
             <div><strong>{{ $user->name }}</strong>
             </div>
             <div class="mb-2">{{ $user->email }}</div>
-            <div>
-                <a href="" class="btn btn-outline-default btn-rounded btn-sm py-2 px-4 shadow-none py-2"><i class="fa fa-power-off"></i> Sign Out</a>
-            </div>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button class="btn btn-outline-default btn-rounded btn-sm py-2 px-4 shadow-none py-2"><i class="fa fa-power-off"></i> Sign Out</button>
+            </form>
         </div>
 
         <div class="sidenav-items mb-4">

@@ -43,7 +43,7 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        return view('auth.register', [
+        return $this->view('auth.register', [
             'security_questions' => User::SECURITY_QUESTIONS,
         ]);
     }

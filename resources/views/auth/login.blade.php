@@ -14,7 +14,8 @@
 
             <div class="col main-content">
 
-                <form class="auth-form">
+                <form class="auth-form" method="post">
+                    @csrf
 
                     <div class="mb-4 text-center">
                         <h4 class="mb-0">Log in to your account</h4>
@@ -31,8 +32,11 @@
                                             <i class="fa fa-fw fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" name="email" placeholder="Email Address" type="email" required />
+                                    <input class="form-control" name="email" placeholder="Email Address" value="{{ old('email') }}" type="email" required />
                                 </div>
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-4">
@@ -42,18 +46,21 @@
                                             <i class="fa fa-fw fa-lock"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control rounded-0" placeholder="Password" name="password" type="password" required />
+                                    <input class="form-control rounded-0" placeholder="Password" name="password" type="password" value="{{ old('password') }}" required />
                                     <div class="input-group-append pass-toggle">
                                         <span class="input-group-text">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </span>
                                     </div>
                                 </div>
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-4">
                                 <div class="custom-control custom-checkbox">
-                                    <input class="custom-control-input mb-0" id="remember" name="remember_me" type="checkbox" />
+                                    <input class="custom-control-input mb-0" id="remember" name="remember" type="checkbox" />
                                     <label for="remember" class="custom-control-label">
                                         <span>Remember Me</span>
                                     </label>
