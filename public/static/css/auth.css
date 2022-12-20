@@ -1,10 +1,7 @@
 body{
     background-color: #fff !important;
-    min-height: 100vh; display: flex; display: -webkit-flex; align-items: center;
 }
-body>*{
-    width: 100% !important;
-}
+
 .main-content .input-group{
     background-color: #efefef;
     transition: .4s all !important;

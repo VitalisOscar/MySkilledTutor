@@ -14,6 +14,10 @@ body{
     border-radius: 50px;
 }
 
+.app-logo{
+    height: 60px !important;
+}
+
 /* Light navbar */
 .top-navbar{
     padding-top: 0;

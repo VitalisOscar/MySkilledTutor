@@ -41,6 +41,13 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        return view('auth.register', [
+            'security_questions' => User::SECURITY_QUESTIONS,
+        ]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -52,7 +59,9 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'password' => ['required', 'string', 'min:8'],
+            'question' => ['required', 'numeric', 'in:'.implode(',', array_keys(User::SECURITY_QUESTIONS))],
+            'answer' => ['required', 'string', 'max:255'],
         ]);
     }
 
@@ -68,6 +77,10 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'security_question' => $data['question'],
+            'security_question_answer' => Hash::make(strtolower(
+                str_replace(' ', '', $data['answer'])
+            )),
         ]);
     }
 }

@@ -88,11 +88,11 @@
                     </div>
 
                     <div class="text-center mb-3">
-                        <span>Forgot Password? <a href={getAppRoute(APP_ROUTES.FORGOT_PASSWORD)}>Reset Password</a></span>
+                        <span>Forgot Password? <a href="{{ route('password.request') }}">Reset Password</a></span>
                     </div>
 
                     <div class="text-center">
-                        <span>Not Registered? <a href={getAppRoute(APP_ROUTES.SIGN_UP)}>Create Account</a></span>
+                        <span>Not Registered? <a href="{{ route('register') }}">Create Account</a></span>
                     </div>
 
                 </form>

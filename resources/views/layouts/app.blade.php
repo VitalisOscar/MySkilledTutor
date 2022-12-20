@@ -22,82 +22,43 @@
     @yield('links')
 </head>
 <body>
-    <div id="app">
-        <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    <strong>{{ config('app.name') }}</strong>
+    <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ url('/') }}">
+                <img class="app-logo" src="{{ asset('static/img/logo.png') }}" alt="{{ config('app.name') }}" >
+            </a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- Left Side Of Navbar -->
+                <ul class="navbar-nav mr-auto">
+
+                </ul>
+
+                <!-- Right Side Of Navbar -->
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link @if($current_route->getName() == 'landing'){{ __('active') }}@endif" href="{{ route('landing') }}">{{ __('Home') }}</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link @if(preg_match('/client./', $current_route->getName())){{ __('active') }}@endif " href="{{ route('client.dashboard') }}">{{ __('Client Area') }}</a>
+                    </li>
+                </ul>
+
+                <a class="btn btn-outline-danger btn-rounded px-4 shadow-none ml-auto" href="{{ route('client.orders.create') }}">
+                    <i class="fa fa-plus mr-2"></i>Make an Order
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Home') }}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('login') }}">{{ __('Contact Us') }}</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{{ route('login') }}">{{ __('Client Area') }}</a>
-                        </li>
-
-                        <!-- Authentication Links -->
-                        {{-- @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Get Started') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle btn btn-success btn-rounded" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    My Account
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest --}}
-                    </ul>
-
-                    <a class="btn btn-outline-danger px-4 shadow-none ml-auto" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                        <i class="fa fa-plus mr-2"></i>Make an Order
-                    </a>
-
-                </div>
             </div>
-        </nav>
+        </div>
+    </nav>
 
-        <main>
-            @yield('content')
-        </main>
-    </div>
+    <main>
+        @yield('content')
+    </main>
 </body>
 </html>

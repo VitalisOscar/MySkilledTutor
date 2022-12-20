@@ -1,26 +1,51 @@
 <?php
 
+use App\Http\Controllers\Client\DashboardController;
+use App\Http\Controllers\Client\NotificationsController;
+use App\Http\Controllers\Client\OrdersController;
+use App\Http\Controllers\Client\SingleOrderController;
+use App\Http\Controllers\Client\UserAccountController;
+use App\Http\Controllers\FrontController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+// Front routes
+Route::get('/', [FrontController::class, 'landing'])->name('landing');
 
-Route::get('/', function () {
-    return view('home');
+
+// Client routes
+
+// Authentication
+Route::prefix('auth')
+->group(function(){
+    Auth::routes();
 });
 
-Auth::routes();
+// Client area
+Route::prefix('client')
+->middleware('auth')
+->name('client')
+->group(function(){
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('dashboard', DashboardController::class)->name('.dashboard');
 
-Route::get('/current', function () {
-    return view('client.account');
+    Route::get('notifications', NotificationsController::class)->name('.notifications');
+
+    // Account management
+    Route::get('account', UserAccountController::class)->name('.account');
+    Route::post('account/password', [UserAccountController::class, 'updatePassword'])->name('.account.password');
+
+    // Orders
+    Route::prefix('orders')
+    ->name('.orders')
+    ->group(function(){
+
+        Route::get('all', OrdersController::class)->name('.all');
+
+        Route::get('create', [OrdersController::class, 'create'])->name('.create');
+        Route::post('create', [OrdersController::class, 'create'])->name('.create');
+
+        Route::get('{order}', SingleOrderController::class)->name('.single');
+
+    });
 });

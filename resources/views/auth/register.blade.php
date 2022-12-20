@@ -14,7 +14,8 @@
 
             <div class="col main-content">
 
-                <form class="auth-form">
+                <form class="auth-form" method="post">
+                    @csrf
 
                     <div class="mb-4 text-center">
                         <h4 class="mb-0">Create a new account</h4>
@@ -33,8 +34,12 @@
                                             <i class="fa fa-fw fa-user"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" name="name" placeholder="" type="email" required />
+                                    <input class="form-control" name="name" value="{{ old('name') }}" type="text" required />
                                 </div>
+
+                                @error('name')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-3">
@@ -46,10 +51,14 @@
                                             <i class="fa fa-fw fa-envelope"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control" name="email" placeholder="" type="email" required />
+                                    <input class="form-control" name="email" value="{{ old('email') }}" type="email" required />
                                 </div>
 
                                 <span>You will verify this in the next step</span>
+
+                                @error('email')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-4">
@@ -60,13 +69,17 @@
                                             <i class="fa fa-fw fa-lock"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control rounded-0" placeholder="" name="password" type="password" required />
+                                    <input class="form-control rounded-0" value="{{ old('password') }}" name="password" type="password" required />
                                     <div class="input-group-append pass-toggle">
                                         <span class="input-group-text">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </span>
                                     </div>
                                 </div>
+
+                                @error('password')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-4">
@@ -74,9 +87,16 @@
 
                                 <div class="input-group">
                                     <select class="form-control rounded-0" name="question" required>
-                                        <option>Select Security Question</option>
+                                        <option value="">Select Security Question</option>
+                                        @foreach ($security_questions as $key => $question)
+                                        <option value="{{ $key }}" @if(old('question') == $key){{ __('selected') }}@endif >{{ $question }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
+
+                                @error('question')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="form-group mb-4">
@@ -88,8 +108,12 @@
                                             <i class="fa fa-fw fa-info"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control rounded-0" placeholder="" name="password" type="password" required />
+                                    <input class="form-control rounded-0" value="{{ old('answer') }}" name="answer" type="password" required />
                                 </div>
+
+                                @error('answer')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div>
@@ -120,7 +144,7 @@
                     </div>
 
                     <div class="text-center">
-                        <span>Already Registered? <a href={getAppRoute(APP_ROUTES.SIGN_UP)}>Log In</a></span>
+                        <span>Already Registered? <a href="{{ route('login') }}">Log In</a></span>
                     </div>
 
                 </form>
