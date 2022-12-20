@@ -13,8 +13,8 @@
             <a href=""><i class="fa fa-user bg-warning"></i>Dashboard</a>
             <a href=""><i class="fa fa-plus bg-primary"></i>Create an order</a>
             <a href=""><i class="fa fa-tasks bg-default"></i>My Orders</a>
-            <a href=""><i class="fa fa-user bg-indigo"></i>Account Settings</a>
-            <a href="" class="active"><i class="fa fa-bell bg-danger"></i>My Notifications</a>
+            <a href="" class="active"><i class="fa fa-user bg-indigo"></i>Account Settings</a>
+            <a href=""><i class="fa fa-bell bg-danger"></i>My Notifications</a>
         </div>
     </div>
 </aside>
