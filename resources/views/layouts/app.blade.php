@@ -26,14 +26,18 @@
     <div class="alert-area px-0 col-lg-4 col-xl-5 col-md-6 mx-auto">
         @if (session()->has('status'))
         <div class="alert alert-default mt-3">
-            <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+            <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-times"></i>
+            </button>
             {{ session()->get('status') }}
         </div>
         @endif
 
         @if ($errors->has('status'))
         <div class="alert alert-danger mt-3">
-            <a href="#" class="close text-white" data-dismiss="alert" aria-label="close">&times;</a>
+            <button type="button" class="close text-white" data-dismiss="alert" aria-label="Close">
+                <i class="fa fa-times"></i>
+            </button>
             {{ $errors->get('status')[0] }}
         </div>
         @endif
@@ -86,5 +90,13 @@
     <main>
         @yield('content')
     </main>
+
+    <script src="https://kit.fontawesome.com/ce4529ea37.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+
+    {{-- Any additional scripts --}}
+    @yield('scripts')
 </body>
 </html>

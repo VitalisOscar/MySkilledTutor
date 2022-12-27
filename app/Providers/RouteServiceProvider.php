@@ -47,7 +47,28 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/web.php'));
         });
+
+        $this->bindRouteParams();
     }
+
+    /**
+     * Bind route parameters
+     *
+     * @return void
+     */
+    protected function bindRouteParams(){
+        Route::bind('order', function($value){
+            if(auth()->check()){
+                return auth()->user()
+                    ->orders()
+                    ->where('id', $value)
+                    ->firstOrFail();
+            }
+
+            return null;
+        });
+    }
+
 
     /**
      * Configure the rate limiters for the application.

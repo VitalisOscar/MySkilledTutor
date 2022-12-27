@@ -21,7 +21,7 @@
                 <i class="fa fa-plus bg-primary"></i>Create an order
             </a>
 
-            <a href="{{ route('client.orders.all') }}"
+            <a href="{{ route('client.orders.all', 'active') }}"
                 @if($current_route->getName() == 'client.orders.all') class="active" @endif>
                 <i class="fa fa-tasks bg-default"></i>My Orders
             </a>

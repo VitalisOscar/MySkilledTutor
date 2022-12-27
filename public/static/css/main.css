@@ -107,3 +107,126 @@ body{
 .foreground{
     background: rgba(0, 0, 0, .9);
 }
+
+
+.content-area{
+    background: #fff;
+    border-radius: 30px;
+    padding: 1.5rem;
+    border: 1px solid #ddd;
+}
+
+
+/* INPUTS */
+.input-group{
+    background-color: #efefef;
+    transition: .2s all !important;
+}
+
+.input-group:focus-within{
+    background-color: #fff;
+    transition: .2s all !important;
+}
+
+.input-group>*{
+    border-color: #efefef !important;
+    border-width: 2px !important;
+    border-style: solid;
+}
+
+.input-group .input-group-prepend{
+    border-right: none;
+    border-radius: .3rem 0 0 .3rem;
+    transition: .2s all !important;
+    background-color: transparent;
+}
+
+.input-group .input-group-append{
+    border-left: none;
+    transition: .2s all !important;
+    background-color: transparent;
+}
+
+.input-group .form-control{
+    transition: .2s all !important;
+    background-color: transparent;
+}
+
+.input-group>*:last-child{
+    border-top-right-radius: .3rem;
+    border-bottom-right-radius: .3rem;
+}
+
+.input-group:focus-within .form-control{
+    border-color: #4285f4 !important;
+    transition: .2s all !important;
+}
+
+.input-group:focus-within .input-group-prepend{
+    border-color: #4285f4 !important;
+    transition: .2s all !important;
+}
+
+.input-group:focus-within .input-group-append{
+    border-color: #4285f4 !important;
+    transition: .2s all !important;
+}
+
+.input-group .input-group-text i{
+    color: #8988aa;
+    transition: .2s all;
+}
+
+.input-group:focus-within .input-group-text i{
+    color: #495057;
+    transition: .2s all;
+}
+
+.input-group .input-group-text{
+    border: none;
+    background-color: transparent;
+}
+
+.form-control{
+    color: #333 !important;
+}
+
+.form-control::placeholder, .form-control:focus::placeholder{
+    color: #495057;
+}
+
+.form-group label{
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+
+
+/* MISCELLANEOUS */
+/* A light blue background info box */
+.info{
+    background: #007bff20;
+    border-radius: 10px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: start;
+}
+
+/* Rounded with some light dark background */
+.info .info-icon{
+    color: #007bff;
+    font-weight: 800;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 30px;
+    height: 30px;
+    font-size: 1.4em;
+    border-radius: 50%;
+}
+
+.info .text{
+    margin-left: 1rem;
+}
+

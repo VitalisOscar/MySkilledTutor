@@ -2,8 +2,10 @@
 
 use App\Http\Controllers\Client\DashboardController;
 use App\Http\Controllers\Client\NotificationsController;
-use App\Http\Controllers\Client\OrdersController;
-use App\Http\Controllers\Client\SingleOrderController;
+use App\Http\Controllers\Client\Orders\CreateOrderController;
+use App\Http\Controllers\Client\Orders\OrdersController;
+use App\Http\Controllers\Client\Orders\SingleOrderController;
+use App\Http\Controllers\Client\PaymentController;
 use App\Http\Controllers\Client\UserAccountController;
 use App\Http\Controllers\FrontController;
 use Illuminate\Support\Facades\Auth;
@@ -40,12 +42,32 @@ Route::prefix('client')
     ->name('.orders')
     ->group(function(){
 
-        Route::get('all', OrdersController::class)->name('.all');
+        Route::get('history/{status}', OrdersController::class)->name('.all');
 
-        Route::get('create', [OrdersController::class, 'create'])->name('.create');
-        Route::post('create', [OrdersController::class, 'create'])->name('.create');
+        // Order creation
+        // Step 1
+        Route::get('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
+        Route::post('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
+
+        // Step 2
+        Route::get('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
+        Route::post('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
+
+        // Step 3
+        Route::get('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
+        Route::post('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
 
         Route::get('{order}', SingleOrderController::class)->name('.single');
+
+
+        // Order Payments
+        Route::prefix('payments')
+        ->name('.payments')
+        ->group(function(){
+            Route::get('for/{order}/attempt', [PaymentController::class, 'process'])->name('.attempt');
+            Route::get('for/{order}/completed', [PaymentController::class, 'completed'])->name('.completed');
+            Route::get('for/{order}/cancelled', [PaymentController::class, 'cancelled'])->name('.cancelled');
+        });
 
     });
 });
