@@ -15,7 +15,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center">
 
-                    <div class="col-lg-7">
+                    <div class="col-lg-7 py-5">
 
                         <h3 class="hero-title">Excel with <strong class="text-warning">quality</strong> assignment help <strong class="text-default">on demand</strong></h3>
 
@@ -28,14 +28,14 @@
                             deadlines for you while delivering top quality work
                         </p>
 
-                        <a href="" class="btn btn-danger px-3 shadow-none">Get Started</a>
+                        <a href="{{ route('client.orders.create') }}" class="btn btn-danger px-3 shadow-none">Get Started</a>
                         <a href="" class="btn btn-outline-default px-3 shadow-none"><i class="fa fa-calculator mr-2 text-danger"></i>Price Calculator</a>
 
                     </div>
 
                     <div class="col-lg-5 py-5">
                         <img class="img-fluid hero-img" src="{{ asset('static/img/home/hero_image.png') }}" alt="Student assignment">
-                </div>
+                    </div>
 
                 </div>
             </div>
@@ -286,7 +286,7 @@
                         </div>
 
                         <div class="action">
-                            <a href="" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
+                            <a href="{{ route('client.orders.create') }}" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
                         </div>
                     </div>
                 </div>
@@ -304,7 +304,7 @@
                         </div>
 
                         <div class="action">
-                            <a href="" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
+                            <a href="{{ route('client.orders.create') }}" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
                         </div>
                     </div>
                 </div>
@@ -322,7 +322,7 @@
                         </div>
 
                         <div class="action">
-                            <a href="" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
+                            <a href="{{ route('client.orders.create') }}" class="btn btn-outline-danger shadow-none">Submit Your Order</a>
                         </div>
                     </div>
                 </div>
@@ -346,7 +346,7 @@
                         We guarantee you'll enjoy the experience
                     </p>
 
-                    <a href="" class="btn btn-danger shadow-none">Get Started Now</a>
+                    <a href="{{ route('client.orders.create') }}" class="btn btn-danger shadow-none">Get Started Now</a>
                 </div>
 
             </div>

@@ -92,8 +92,9 @@ class Order extends Model
 
     // Accessors
     public function getFmtUrgencyAttribute(){
-        if($this->urgency > 24 && ($this->urgency % 24) == 0){
-            return $this->urgency / 24 . ' Days';
+        if($this->urgency >= 24 && ($this->urgency % 24) == 0){
+            $urgency = $this->urgency / 24;
+            return $urgency . ' Day'.($urgency > 1 ? 's' : '');
         }else{
             return $this->urgency . ' Hours';
         }
@@ -101,6 +102,10 @@ class Order extends Model
 
     public function getFmtPriceAttribute(){
         return '$' . number_format($this->price, 2);
+    }
+
+    public function getFmtCreatedAtAttribute(){
+        return $this->created_at->diffForHumans();
     }
 
 

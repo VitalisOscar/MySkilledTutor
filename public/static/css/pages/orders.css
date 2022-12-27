@@ -1,0 +1,44 @@
+.statuses{
+    overflow-x: hidden;
+    white-space: nowrap;
+}
+
+.statuses a{
+    display: inline-block;
+    color: #444;
+    padding: 10px 15px;
+    font-weight: 800;
+    border-radius: .3rem;
+    transition: .25s all !important;
+    background: #eee;
+}
+
+.statuses a:not(:last-child){
+    margin-right: 5px
+}
+
+.statuses a.active{
+    background: #172b4d;
+    color: #fff;
+}
+
+.statuses a:not(.active):hover,
+.statuses a:not(.active):focus
+{
+    color: #172b4d;
+}
+
+.order{
+    border-radius: 20px;
+    box-shadow: 0 0 5px rgba(0,0,0,.1);
+    color: inherit !important;
+}
+
+.order .order-icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    font-size: 1.6em;
+}
