@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 class SingleOrderController extends Controller
 {
     function __invoke($order){
-        return $this->view('client.orders.single');
+        return $this->view('client.orders.single', [
+            'order' => $order
+        ]);
     }
 }

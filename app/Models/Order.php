@@ -67,6 +67,10 @@ class Order extends Model
         return $this->hasMany(Payment::class);
     }
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
 
     // Scopes
     public function scopeCompleted($query){
@@ -104,8 +108,32 @@ class Order extends Model
         return '$' . number_format($this->price, 2);
     }
 
+    function getFmtPagesAttribute(){
+        return $this->pages . ' page'.($this->pages > 1 ? 's' : '');
+    }
+
     public function getFmtCreatedAtAttribute(){
         return $this->created_at->diffForHumans();
+    }
+
+    public function getTimeRemainingAttribute(){
+        // If past deadline, return none
+        if($this->created_at->diffInHours(now()) >= $this->urgency){
+            return 'None';
+        }
+
+        // days, hours:minutes
+        $timeRemaining = $this->urgency - $this->created_at->diffInHours(now());
+
+        // If 0 hours, return minutes
+        if($timeRemaining == 0){
+            $minutes = $this->created_at->diffInMinutes(now());
+            return $minutes . ' minute'.($minutes > 1 ? 's' : '');
+        }
+
+        $days = floor($timeRemaining / 24);
+        $hours = $timeRemaining % 24;
+        return $days . ' day'.($days > 1 ? 's' : '').' '.$hours.' hour'.($hours > 1 ? 's' : '');
     }
 
 
@@ -131,5 +159,26 @@ class Order extends Model
         // Update
         $this->price = $price;
         $this->save();
+    }
+
+
+    function isDraft(){
+        return $this->status == self::STATUS_DRAFT;
+    }
+
+    function isPendingPayment(){
+        return $this->status == self::STATUS_PENDING_PAYMENT;
+    }
+
+    function isActive(){
+        return $this->status == self::STATUS_ACTIVE;
+    }
+
+    function isCompleted(){
+        return $this->status == self::STATUS_COMPLETED;
+    }
+
+    function isCancelled(){
+        return $this->status == self::STATUS_CANCELLED;
     }
 }

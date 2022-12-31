@@ -46,10 +46,26 @@ class Attachment extends Model
         return asset('storage/'.$this->path);
     }
 
+    function getExtensionAttribute(){
+        return pathinfo($this->path, PATHINFO_EXTENSION);
+    }
+
 
     // Helpers
     function isImage(){
-        return $this->type == self::TYPE_IMAGE;
+        return strtolower(explode('/', $this->type)[0]) == strtolower(self::TYPE_IMAGE);
+    }
+
+    function isPdf(){
+        return !$this->isImage() && $this->extension == 'pdf';
+    }
+
+    function isWordDoc(){
+        return !$this->isImage() && ($this->extension == 'docx' || $this->extension == 'doc');
+    }
+
+    function isZip(){
+        return !$this->isImage() && $this->extension == 'zip';
     }
 
 }

@@ -31,4 +31,8 @@
             </span>
         </div>
     </div>
+
+    <span class="ml-auto mr-3 d-none d-sm-inline-block">
+        <i class="fa fa-chevron-right"></i>
+    </span>
 </a>
