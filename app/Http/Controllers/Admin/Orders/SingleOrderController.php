@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Orders;
 
 use App\Events\NewMessageEvent;
+use App\Events\OrderCancelledEvent;
 use App\Events\OrderCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
@@ -111,6 +112,46 @@ class SingleOrderController extends Controller
                 ->withInput()
                 ->withErrors([
                     'status' => 'An error occurred while sending the message. Please try again later.'
+                ]);
+        }
+    }
+
+    function cancel(Request $request, $order){
+        // Order should be active to be cancelled
+        if(!$order->isActive()){
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'status' => 'The order cannot be cancelled at this stage. Only active orders can be cancelled'
+                ]);
+        }
+
+        // Reason should be provided
+        if(!$request->reason){
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'status' => 'Please provide a reason for cancelling the order'
+                ]);
+        }
+
+        try{
+            $order->update([
+                'status' => Order::STATUS_CANCELLED,
+                'cancelled_at' => now(),
+                'cancellation_reason' => $request->reason
+            ]);
+
+            OrderCancelledEvent::dispatch($order);
+
+            return back()->with([
+                'status' => 'The order has bee cancelled'
+            ]);
+        }catch(\Exception $e){
+            return back()
+                ->withInput()
+                ->withErrors([
+                    'status' => 'An error occurred while cancelling the order. Please try again later.'
                 ]);
         }
     }

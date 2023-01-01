@@ -204,6 +204,8 @@
         </div>
     </main>
 
+    @yield('modals')
+
 
     <script src="https://kit.fontawesome.com/ce4529ea37.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>

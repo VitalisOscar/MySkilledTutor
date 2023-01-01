@@ -117,4 +117,7 @@ return [
 
     'password_timeout' => 10800,
 
+    // In minutes
+    'verification_code_validity' => 15,
+
 ];

@@ -44,7 +44,11 @@ class Order extends Model
         'urgency', // in hours
         'price',
         'status',
-        'assigned_to'
+        'assigned_to',
+        'paid_at',
+        'cancelled_at',
+        'completed_at',
+        'cancellation_reason'
     ];
 
     public $timestamps = true;

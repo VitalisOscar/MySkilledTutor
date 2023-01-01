@@ -68,4 +68,8 @@ class User extends Authenticatable
     function getMessageSenderNameAttribute(){
         return $this->name;
     }
+
+
+
+    // Helpers
 }

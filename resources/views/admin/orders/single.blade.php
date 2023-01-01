@@ -157,7 +157,7 @@
         @php
         $last_sender = null;
         @endphp
-        
+
         @foreach ($order->messages as $message)
         @php
         if($message->sender_type == $last_sender){
@@ -175,6 +175,14 @@
         @endif
 
         {{-- For an order that was cancelled --}}
+        @if ($order->isCancelled())
+        <div class="info">
+            <i class="info-icon fa fa-info-circle"></i>
+            <span class="text">
+                This order was cancelled: {{ $order->cancellation_reason }}
+            </span>
+        </div>
+        @endif
 
         {{-- Allow send message for active and complete orders --}}
         @if($order->isActive() || $order->isCompleted())
@@ -210,8 +218,15 @@
                 @enderror
             </div>
 
-            <div class="form-group">
+            <div class="form-group d-flex align-items-center">
                 <button type="submit" class="btn btn-danger shadow-none px-4">Send</button>
+
+                @if($order->isActive())
+                <div class="ml-sm-auto d-flex align-items-center">
+                    <span>Or</span>&nbsp;
+                    <a data-toggle="modal" href="#cancelOrder">Cancel Order</a>
+                </div>
+                @endif
             </div>
 
         </form>
@@ -220,4 +235,42 @@
 
     </div>
 </div>
+@endsection
+
+@section('modals')
+{{-- Order cancellation modal --}}
+@if($order->isActive())
+<div class="modal fade" id="cancelOrder">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+                <h5 class="mb-0">Cancel Order</h5>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span>&times;</span>
+                </button>
+            </div>
+
+            <form action="{{ route('admin.orders.cancel', $order) }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="reason">Reason for cancellation</label>
+                        <textarea name="reason" id="reason" class="form-control" rows="4">{{ old('reason') }}</textarea>
+                        @error('reason')
+                        <span class="text-danger" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary shadow-none" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger shadow-none">Cancel Order</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
 @endsection

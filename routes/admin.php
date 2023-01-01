@@ -46,6 +46,7 @@ Route::prefix('admin')
         Route::get('{order}', SingleOrderController::class)->name('.single');
 
         Route::post('{order}/send-message', [SingleOrderController::class, 'sendMessage'])->name('.send_message');
+        Route::post('{order}/cancel', [SingleOrderController::class, 'cancel'])->name('.cancel');
 
     });
 

@@ -21,11 +21,16 @@ Route::get('/', [FrontController::class, 'landing'])->name('landing');
 Route::prefix('auth')
 ->group(function(){
     Auth::routes();
+
+    Route::get('verification', [UserAccountController::class, 'verifyEmail'])->name('verify_email');
+    Route::post('verification', [UserAccountController::class, 'verifyEmail'])->name('verify_email');
+
+    Route::post('verification/get-code', [UserAccountController::class, 'resendVerificationCode'])->name('get_verification_code');
 });
 
 // Client area
 Route::prefix('client')
-->middleware('auth')
+->middleware(['auth', 'verified_email'])
 ->name('client')
 ->group(function(){
 
