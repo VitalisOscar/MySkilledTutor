@@ -64,13 +64,7 @@
                     <div>
                         <h6 class="mb-1">Email Address</h6>
                         <p class="mb-0">
-                            Verified on 2022 Nov 28
-                            {{-- <form method="POST" action="" id="email_verification_form" class="d-flex align-items-center">
-                                @csrf
-                                @method('head')
-                                <span>Not Verified</span>
-                                <button class="ml-auto float-right btn btn-link p-0">Verify Now</button>
-                            </form> --}}
+                            Verified on {{ $user->email_verified_at->format('M d, Y') }}
                         </p>
                     </div>
 
@@ -84,24 +78,39 @@
             <div>
                 <h5 class="font-weight-600">Change your Password</h5>
 
-                <form action="" method="post">
+                <form action="{{ route('client.account.password') }}" method="post">
                     @csrf
                     <div class="form-group">
                         <strong>Current Password:</strong>
                         <br><small>We need this to confirm that it is you making this change</small>
                         <input class="form-control" type="password" name="password" value="{{ old('password') }}" required>
+                        @error('password')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <strong>New Password:</strong>
                         <br><small>Enter the new password that you want to be using</small>
                         <input class="form-control" type="password" name="new_password" value="{{ old('new_password') }}" required>
+                        @error('new_password')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div class="form-group">
                         <strong>Confirm Password:</strong>
                         <br><small>Retype your new password</small>
                         <input class="form-control" type="password" name="confirm_password" value="{{ old('confirm_password') }}" required>
+                        @error('confirm_password')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
 
                     <div>

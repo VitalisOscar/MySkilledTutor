@@ -83,7 +83,7 @@
     <div class="info">
         <i class="info-icon fa fa-info-circle"></i>
         <span class="text">
-            This order was cancelled as a result of a failed or cancelled payment and was not assigned to a tutor.
+            This order was cancelled after being assigned to a tutor.
         </span>
     </div>
     @endif
@@ -180,6 +180,14 @@
         @endif
 
         {{-- For an order that was cancelled --}}
+        @if ($order->isCancelled())
+        <div class="info">
+            <i class="info-icon fa fa-info-circle"></i>
+            <span class="text">
+                This order was cancelled: {{ $order->cancellation_reason }}
+            </span>
+        </div>
+        @endif
 
         {{-- Allow send message for active and complete orders --}}
         @if($order->isActive() || $order->isCompleted())

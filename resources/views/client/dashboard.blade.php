@@ -15,7 +15,7 @@
 
         <div class="col-lg-4">
             <div class="card bg-gradient-danger summary">
-                <a href="" class="link"></a>
+                <a href="{{ route('client.orders.all', 'active') }}" class="link"></a>
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
@@ -30,7 +30,7 @@
 
         <div class="col-lg-4">
             <div class="card bg-gradient-default summary">
-                <a href="" class="link"></a>
+                <a href="{{ route('client.orders.all', 'active') }}" class="link"></a>
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
@@ -45,7 +45,7 @@
 
         <div class="col-lg-4">
             <div class="card bg-gradient-success summary">
-                <a href="" class="link"></a>
+                <a href="{{ route('client.orders.all', 'completed') }}" class="link"></a>
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
