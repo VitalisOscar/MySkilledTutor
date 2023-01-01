@@ -86,7 +86,7 @@ class CreateOrderController extends Controller
 
         if($validator->fails()){
             return back()->withInput()
-                ->with([
+                ->withErrors([
                     'status' => 'Please fix the highlighted errors and try again'
                 ])
                 ->withErrors($validator);

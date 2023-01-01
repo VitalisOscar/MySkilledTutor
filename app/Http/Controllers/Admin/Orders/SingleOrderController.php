@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Client\Orders;
+namespace App\Http\Controllers\Admin\Orders;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Admin;
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,7 @@ class SingleOrderController extends Controller
         $order->loadCount('messages');
         $order->load('messages');
 
-        return $this->view('client.orders.single', [
+        return $this->view('admin.orders.single', [
             'order' => $order
         ]);
     }
@@ -48,10 +49,10 @@ class SingleOrderController extends Controller
             DB::beginTransaction();
 
             $message = $order->messages()->create([
-                'sender_id' => auth('web')->id(),
-                'sender_type' => User::MODEL_NAME,
+                'sender_id' => auth('admin')->id(),
+                'sender_type' => Admin::MODEL_NAME,
                 'message' => $request->message,
-                'is_answer' => false
+                'is_answer' => $request->boolean('complete')
             ]);
 
             if(!$message->id ?? null){
@@ -83,6 +84,13 @@ class SingleOrderController extends Controller
                             ]);
                     }
                 }
+            }
+
+            // If order was marked complete
+            if($request->boolean('complete')){
+                $order->update([
+                    'status' => Order::STATUS_COMPLETED
+                ]);
             }
 
             DB::commit();

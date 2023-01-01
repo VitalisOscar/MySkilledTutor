@@ -250,7 +250,7 @@ body{
 
 .info .text{
     margin-left: 1rem;
-    display: inline-flex;
+    display: flex;
     align-self: center;
 }
 

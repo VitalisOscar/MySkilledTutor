@@ -1,9 +1,21 @@
-<a href="{{ route('client.orders.single', $order) }}" class="order d-flex align-items-center mb-3 bg-white p-3">
+<a href="{{ route('admin.orders.single', $order) }}" class="order d-flex align-items-center mb-3 bg-white p-3 @if($order->isActive() && !$order->isAssigned()) unassigned @endif">
     <span class="order-icon d-none d-sm-inline-flex">
         <i class="fa fa-file"></i>
     </span>
 
-    <div class="ml-3">
+    <div class="ml-sm-3">
+        @if($order->isActive())
+        @if($order->isAssigned())
+        <strong class="small font-weight-700 text-success">
+            ASSIGNED
+        </strong>
+        @else
+        <strong class="small font-weight-700 text-danger">
+            UNASSIGNED
+        </strong>
+        @endif
+        @endif
+
         <h5 class="mb-2">
             {{ $order->title ?? 'Order Title' }}
         </h5>
@@ -19,17 +31,18 @@
 
         <div class="d-flex align-items-center">
             <i class="fa fa-clock-o mr-1 small text-default"></i>
-            
+
             <span class="mr-4">
                 {{ $order->fmt_urgency }}
             </span>
-            
+
             <i class="fa fa-coins mr-1 small text-default"></i>
-            
-            <span class="">
+
+            <span class="mr-4">
                 {{ $order->fmt_price }}
             </span>
         </div>
+
     </div>
 
     <span class="ml-auto mr-3 d-none d-sm-inline-block">

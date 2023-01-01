@@ -1,103 +1,99 @@
-@extends('layouts.client_area')
+@extends('layouts.admin')
 
 @section('title', 'Order Info - '.$order->title)
 
-@section('more_links')
+@section('links')
 <link rel="stylesheet" href="{{ asset('static/css/pages/orders.css') }}">
 @endsection
 
-@section('page_content')
-<div>
+@section('page_heading')
+<i class="fa fa-file mr-3"></i>{{ 'Order: ' . $order->title }}
+@endsection
 
-    <div class="mb-3">
-        <h4 class="font-weight-600 mb-3">{{ $order->title }}</h4>
+@section('content')
+<div class="row">
+    <div class="col-lg-10 col-xl-10">
 
-        <div class="d-sm-flex align-items-center mb-2">
-            <span>{{ $order->subject->name }}</span>
-            <span class="mx-2">|&nbsp;|</span>
-            <span>{{ $order->paperType->name }}</span>
-            <span class="mx-2">|&nbsp;|</span>
-            <span>{{ 'Level: '.$order->academicLevel->name.' ('.$order->formatting.' Formating)' }}</span>
-        </div>
-    </div>
+        <div class="mb-3">
 
-    <div class="row mb-3">
-        <div class="col-12 col-sm-4 col-lg-3 d-flex align-items-center">
-            <i class="fa fa-fw fa-clock-o"></i>
-            <span class="ml-2">
-                {{ $order->fmt_urgency }}
-
-                @if($order->isActive() || $order->isCompleted())
-                @if($order->deadlineElapsed())
-                (Elapsed)
-                @else
-                ({{ $order->time_remaining.' to go' }})
-                @endif
-                @endif
-            </span>
-        </div>
-        <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
-            <i class="fa fa-fw fa-coins"></i>
-            <span class="ml-2">
-                {{ $order->fmt_price }}
-            </span>
-        </div>
-        <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="ml-2">
-                {{ $order->fmt_pages }}
-            </span>
-        </div>
-        <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
-            <i class="fa fa-fw fa-tasks"></i>
-            <span class="ml-2">
-                {{ $order->status }}
-            </span>
-        </div>
-    </div>
-
-    {{-- Check status --}}
-    @if($order->isPendingPayment())
-    <div class="info">
-        <i class="info-icon fa fa-info-circle"></i>
-        <span class="text">
-            Order is currently pending payment. A tutor will be assigned the order once payment is done.
-        </span>
-    </div>
-    @elseif($order->isActive())
-    <div class="info">
-        <i class="info-icon fa fa-info-circle"></i>
-        <span class="text">
-            This order is currently assigned to a tutor.
-            You can use the chat to communicate with the tutor, send additional material or raise any concerns.
-        </span>
-    </div>
-    @elseif($order->isCompleted())
-    <div class="info">
-        <i class="info-icon fa fa-info-circle"></i>
-        <span class="text">
-            This order has been completed by the tutor. You can download the final answer.
-        </span>
-    </div>
-    @elseif($order->isCancelled())
-    <div class="info">
-        <i class="info-icon fa fa-info-circle"></i>
-        <span class="text">
-            This order was cancelled as a result of a failed or cancelled payment and was not assigned to a tutor.
-        </span>
-    </div>
-    @endif
-
-    {{-- Order details --}}
-    <div class="mb-3">
-        <h5 class="heading mb-3">Instructions</h5>
-        <div class="mb-4">
-            <div>
-                {!! $order->instructions ?? 'None provided' !!}
+            <div class="d-sm-flex align-items-center mb-2">
+                <span>{{ $order->subject->name }}</span>
+                <span class="mx-2">|&nbsp;|</span>
+                <span>{{ $order->paperType->name }}</span>
+                <span class="mx-2">|&nbsp;|</span>
+                <span>{{ 'Level: '.$order->academicLevel->name.' ('.$order->formatting.' Formating)' }}</span>
             </div>
         </div>
 
-        @if($order->attachments->count() > 0)
+        <div class="row mb-3">
+            <div class="col-12 col-sm-4 col-lg-3 d-flex align-items-center">
+                <i class="fa fa-fw fa-clock-o"></i>
+                <span class="ml-2">
+                    {{ $order->fmt_urgency }}
+
+                    @if($order->isActive() || $order->isCompleted())
+                    @if($order->deadlineElapsed())
+                    (Elapsed)
+                    @else
+                    ({{ $order->time_remaining.' to go' }})
+                    @endif
+                    @endif
+                </span>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
+                <i class="fa fa-fw fa-coins"></i>
+                <span class="ml-2">
+                    {{ $order->fmt_price }}
+                </span>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
+                <i class="fa fa-fw fa-file"></i>
+                <span class="ml-2">
+                    {{ $order->fmt_pages }}
+                </span>
+            </div>
+            <div class="col-6 col-sm-4 col-lg-3 d-flex align-items-center">
+                <i class="fa fa-fw fa-tasks"></i>
+                <span class="ml-2">
+                    {{ $order->status }}
+                </span>
+            </div>
+        </div>
+
+        {{-- Check status --}}
+        @if($order->isActive())
+        <div class="info">
+            <i class="info-icon fa fa-info-circle"></i>
+            <span class="text">
+                This order has been paid for.
+            </span>
+        </div>
+        @elseif($order->isCompleted())
+        <div class="info">
+            <i class="info-icon fa fa-info-circle"></i>
+            <span class="text">
+                This order has been marked as complete. You can still use the chat to communicate with the client.
+            </span>
+        </div>
+        @elseif($order->isCancelled())
+        <div class="info">
+            <i class="info-icon fa fa-info-circle"></i>
+            <span class="text">
+                This order was cancelled by an admin.
+            </span>
+        </div>
+        @endif
+
+        {{-- Order details --}}
+        <div class="mb-3">
+            <h5 class="heading mb-3">Instructions</h5>
+            <div class="mb-4">
+                <div>
+                    {!! $order->instructions ?? 'None provided' !!}
+                </div>
+            </div>
+
+            @if($order->attachments->count() > 0)
             <h5 class="heading mb-3">Attached Files</h5>
 
             <div class="mb-4">
@@ -133,10 +129,9 @@
                     </div>
                 </div>
             </div>
-        @endif
+            @endif
 
-    </div>
-
+        </div>
 
         {{-- Order chat --}}
         {{-- Show this message for active or completed orders --}}
@@ -145,13 +140,13 @@
             <i class="info-icon fa fa-info-circle"></i>
             <div class="text">
                 <div>
-                    Use this chat to communicate with the tutor e.g:
+                    Use this chat to communicate with the client when:
                     <ul class="px-3">
-                        <li>To send any additional material/clarification</li>
-                        <li>To raise any concerns or ask questions</li>
+                        <li>Requesting additional material/clarification</li>
+                        <li>Responding to any concerns or questions</li>
                     </ul>
-                    You will get your responses here. When an answer is ready, it will be sent
-                    here as well
+                    When the solution to the order is ready,
+                    zip and attach the necessary files, tick the "Mark as answer" checkbox and send
                 </div>
             </div>
         </div>
@@ -162,7 +157,7 @@
         @php
         $last_sender = null;
         @endphp
-
+        
         @foreach ($order->messages as $message)
         @php
         if($message->sender_type == $last_sender){
@@ -175,7 +170,7 @@
         $last_sender = $message->sender_type;
         @endphp
 
-        @include('client.orders._message', ['message' => $message, 'continuous' => $continuous])
+        @include('admin.orders._message', ['message' => $message, 'continuous' => $continuous])
         @endforeach
         @endif
 
@@ -183,7 +178,7 @@
 
         {{-- Allow send message for active and complete orders --}}
         @if($order->isActive() || $order->isCompleted())
-        <form action="{{ route('client.orders.send_message', $order) }}" method="post" class="pt-3" enctype="multipart/form-data">
+        <form action="{{ route('admin.orders.send_message', $order) }}" method="post" class="pt-3" enctype="multipart/form-data">
             @csrf
 
             <div class="form-group">
@@ -194,6 +189,13 @@
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
+            </div>
+
+            <div class="form-group">
+                <div class="custom-control custom-checkbox">
+                    <input type="checkbox" name="complete" id="complete" class="custom-control-input" >
+                    <label for="complete" class="custom-control-label mb-0">Mark as answer</label>
+                </div>
             </div>
 
             <div class="form-group">
@@ -216,6 +218,6 @@
 
         @endif
 
-
+    </div>
 </div>
 @endsection

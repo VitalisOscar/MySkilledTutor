@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Shared\Rules;
+namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Lang;

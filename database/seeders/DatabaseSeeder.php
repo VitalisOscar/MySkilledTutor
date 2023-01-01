@@ -16,7 +16,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             PaperTypeSeeder::class,
             AcademicLevelSeeder::class,
-            SubjectSeeder::class
+            SubjectSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }

@@ -34,6 +34,10 @@
     color: inherit !important;
 }
 
+.order.unassigned{
+    box-shadow: 0 0 5px 1px #ff7f5090;
+}
+
 .order .order-icon{
     display: inline-flex;
     align-items: center;
@@ -47,17 +51,12 @@
 
 
 /* SINGLE ORDER PAGE */
-.attachments{
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .attachment{
+    display: block;
     border-radius: 20px;
     box-shadow: 0 0 5px rgba(0,0,0,.1);
     margin-bottom: 1rem;
-    width: 150px;
-    margin-right: 1rem;
+    background: #fff;
 }
 
 .attachment:hover{
@@ -99,3 +98,46 @@
 
 
 
+/* Message styles */
+.message{
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.message.sent{
+    margin-left: auto;
+}
+
+.message.sent .message-header{
+    text-align: right;
+}
+
+.message .message-body{
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: .5rem;
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+.message.continuous .message-header{
+    display: none;
+}
+
+.message.is_answer .message-body{
+    border: 1px solid #2dce89;
+}
+
+.message.is_answer .attachment{
+    background: #eee;
+}
+
+.message .avatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.message .meta{
+    font-size: .9em;
+}

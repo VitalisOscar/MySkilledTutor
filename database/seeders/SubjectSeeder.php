@@ -67,6 +67,9 @@ class SubjectSeeder extends Seeder
             ['name' => 'Other'],
         ];
 
-        \App\Models\Subject::insert($data);
+        foreach($data as $datum){
+            if(!\App\Models\Subject::where('name', $datum['name'])->exists())
+                \App\Models\Subject::create($datum);
+        }
     }
 }

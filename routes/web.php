@@ -58,6 +58,7 @@ Route::prefix('client')
         Route::post('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
 
         Route::get('{order}', SingleOrderController::class)->name('.single');
+        Route::post('{order}/send-message', [SingleOrderController::class, 'sendMessage'])->name('.send_message');
 
 
         // Order Payments
@@ -71,3 +72,6 @@ Route::prefix('client')
 
     });
 });
+
+// Admin
+require __DIR__.'/admin.php';

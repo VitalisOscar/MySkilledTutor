@@ -3,9 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
-    use HasFactory;
+    const MODEL_NAME = 'Admin';
+
+    protected $fillable = [
+        'username',
+        'email',
+        'password',
+    ];
+
+    public $timestamps = true;
+
+
+
+    function getMessageSenderNameAttribute(){
+        return 'Tutor';
+    }
 }

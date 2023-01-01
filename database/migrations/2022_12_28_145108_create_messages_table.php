@@ -15,6 +15,10 @@ class CreateMessagesTable extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->morphs('sender');
+            $table->text('message');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }

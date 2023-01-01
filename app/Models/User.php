@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const MODEL_NAME = 'User';
+
     const SECURITY_QUESTIONS = [
         1 => 'Which city were you born in?',
         2 => 'What high school did you attend',
@@ -42,9 +44,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public $timestamps = true;
+
 
     // RELATIONS
     public function orders(){
         return $this->hasMany(Order::class);
+    }
+
+    public function countable_orders(){
+        return $this->orders()->where(function($q){
+            $q->whereIn('status', Order::COUNTABLE_ORDER_STATUS);
+        });
+    }
+
+
+    // Accessors
+    public function getFmtCreatedAtAttribute(){
+        return $this->created_at->diffForHumans();
+    }
+
+
+    function getMessageSenderNameAttribute(){
+        return $this->name;
     }
 }

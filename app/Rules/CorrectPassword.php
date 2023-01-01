@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Shared\Rules;
+namespace App\Rules;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Contracts\Validation\Rule;

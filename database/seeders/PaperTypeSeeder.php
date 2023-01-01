@@ -35,6 +35,9 @@ class PaperTypeSeeder extends Seeder
             ['name' => 'Other'],
         ];
 
-        \App\Models\PaperType::insert($data);
+        foreach($data as $datum){
+            if(!\App\Models\PaperType::where('name', $datum['name'])->exists())
+                \App\Models\PaperType::create($datum);
+        }
     }
 }

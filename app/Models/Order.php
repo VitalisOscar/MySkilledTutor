@@ -13,7 +13,14 @@ class Order extends Model
     const STATUS_PENDING_PAYMENT = 'Pending Payment';
     const STATUS_ACTIVE = 'Active';
     const STATUS_COMPLETED = 'Completed';
+    const STATUS_FAILED = 'Failed';
     const STATUS_CANCELLED = 'Cancelled';
+
+    CONST COUNTABLE_ORDER_STATUS = [
+        self::STATUS_ACTIVE,
+        self::STATUS_COMPLETED,
+        self::STATUS_CANCELLED,
+    ];
 
     const BASE_PRICE = 8;
 
@@ -36,10 +43,19 @@ class Order extends Model
         'formatting',
         'urgency', // in hours
         'price',
-        'status'
+        'status',
+        'assigned_to'
     ];
 
     public $timestamps = true;
+
+    protected $casts = [
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
+        'paid_at' => 'datetime',
+        'completed_at' => 'datetime',
+        'cancelled_at' => 'datetime',
+    ];
 
 
     // RELATIONS
@@ -85,6 +101,10 @@ class Order extends Model
         return $query->where('status', self::STATUS_ACTIVE);
     }
 
+    public function scopeFailed($query){
+        return $query->where('status', self::STATUS_FAILED);
+    }
+
     public function scopeCancelled($query){
         return $query->where('status', self::STATUS_CANCELLED);
     }
@@ -118,12 +138,12 @@ class Order extends Model
 
     public function getTimeRemainingAttribute(){
         // If past deadline, return none
-        if($this->created_at->diffInHours(now()) >= $this->urgency){
+        if($this->paid_at->diffInHours(now()) >= $this->urgency){
             return 'None';
         }
 
         // days, hours:minutes
-        $timeRemaining = $this->urgency - $this->created_at->diffInHours(now());
+        $timeRemaining = $this->urgency - $this->paid_at->diffInHours(now());
 
         // If 0 hours, return minutes
         if($timeRemaining == 0){
@@ -133,11 +153,22 @@ class Order extends Model
 
         $days = floor($timeRemaining / 24);
         $hours = $timeRemaining % 24;
-        return $days . ' day'.($days > 1 ? 's' : '').' '.$hours.' hour'.($hours > 1 ? 's' : '');
+
+        $remaining = '';
+
+        if($days > 0){
+            $remaining .= $days . ' day'.($days > 1 ? 's' : '').' ';
+        }
+
+        return $remaining.$hours.' hour'.($hours > 1 ? 's' : '');
     }
 
 
     // Helpers
+    function deadlineElapsed(){
+        return ($this->paid_at ?? $this->created_at)->diffInHours(now()) >= $this->urgency;
+    }
+
     public function calculatePrice(){
         $price = self::BASE_PRICE;
 
@@ -180,5 +211,17 @@ class Order extends Model
 
     function isCancelled(){
         return $this->status == self::STATUS_CANCELLED;
+    }
+
+    function didFail(){
+        return $this->status == self::STATUS_FAILED;
+    }
+
+    function isAssigned(){
+        return $this->assigned_to != null;
+    }
+
+    function hasMessages(){
+        return $this->messages_count > 0;
     }
 }

@@ -21,6 +21,9 @@ class AcademicLevelSeeder extends Seeder
             ['name' => 'PhD'],
         ];
 
-        \App\Models\AcademicLevel::insert($data);
+        foreach($data as $datum){
+            if(!\App\Models\AcademicLevel::where('name', $datum['name'])->exists())
+                \App\Models\AcademicLevel::create($datum);
+        }
     }
 }

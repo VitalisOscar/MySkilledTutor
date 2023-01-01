@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Order;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -58,6 +60,12 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function bindRouteParams(){
         Route::bind('order', function($value){
+            // Admin route
+            if(request()->is('admin/orders*')){
+                return Order::where('id', $value)->firstOrFail();
+            }
+
+            // Client route
             if(auth()->check()){
                 return auth()->user()
                     ->orders()
@@ -66,6 +74,10 @@ class RouteServiceProvider extends ServiceProvider
             }
 
             return null;
+        });
+
+        Route::bind('client', function($value){
+            return User::where('id', $value)->firstOrFail();
         });
     }
 
