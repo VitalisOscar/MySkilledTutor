@@ -89,6 +89,10 @@ class Order extends Model
 
 
     // Scopes
+    public function scopeCountable($query){
+        return $query->whereIn('status', self::COUNTABLE_ORDER_STATUS);
+    }
+
     public function scopeCompleted($query){
         return $query->where('status', self::STATUS_COMPLETED);
     }

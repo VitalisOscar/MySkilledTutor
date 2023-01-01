@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Client;
 
+use App\Events\OrderCreatedEvent;
+use App\Events\OrderFailedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\Payment;
@@ -72,7 +74,7 @@ class PaymentController extends Controller
     }
 
     function cancelled($order){
-        $this->cancelOrder($order);
+        $this->failOrder($order);
 
         return redirect()
             ->route('client.orders.create.review', $order)
@@ -93,7 +95,7 @@ class PaymentController extends Controller
                 ->route('client.orders.single', $order)
                 ->with('status', 'Payment processed successfully');
         } else {
-            $this->cancelOrder($order);
+            $this->failOrder($order);
 
             return redirect()
                 ->route('client.orders.create.review', $order)
@@ -101,10 +103,10 @@ class PaymentController extends Controller
         }
     }
 
-    function cancelOrder($order){
+    function failOrder($order){
         // Mark order as cancelled
         $order->update([
-            'status' => Order::STATUS_CANCELLED
+            'status' => Order::STATUS_FAILED
         ]);
 
         // Mark the order's pending payment as failed
@@ -113,12 +115,15 @@ class PaymentController extends Controller
             ->update([
                 'status' => Payment::STATUS_FAILED
             ]);
+
+        OrderFailedEvent::dispatch($order);
     }
 
     function progressOrder($order){
         // Mark order as in progress
         $order->update([
-            'status' => Order::STATUS_IN_PROGRESS
+            'status' => Order::STATUS_ACTIVE,
+            'paid_at' => now()
         ]);
 
         // Mark payment complete
@@ -127,5 +132,7 @@ class PaymentController extends Controller
             ->update([
                 'status' => Payment::STATUS_COMPLETED
             ]);
+
+        OrderCreatedEvent::dispatch($order);
     }
 }

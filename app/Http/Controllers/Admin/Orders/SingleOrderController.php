@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Orders;
 
+use App\Events\NewMessageEvent;
+use App\Events\OrderCompletedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use App\Models\Order;
@@ -89,8 +91,13 @@ class SingleOrderController extends Controller
             // If order was marked complete
             if($request->boolean('complete')){
                 $order->update([
-                    'status' => Order::STATUS_COMPLETED
+                    'status' => Order::STATUS_COMPLETED,
+                    'completed_at' => now()
                 ]);
+
+                OrderCompletedEvent::dispatch($order);
+            }else{
+                NewMessageEvent::dispatch($message);
             }
 
             DB::commit();

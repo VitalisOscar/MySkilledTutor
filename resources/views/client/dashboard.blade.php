@@ -19,7 +19,7 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                        <h2 class="summary-count mb-0">6</h2>
+                        <h2 class="summary-count mb-0">{{ $all_orders }}</h2>
                         <i class="summary-icon fa fa-tasks ml-auto"></i>
                     </div>
 
@@ -34,7 +34,7 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                        <h2 class="summary-count mb-0">1</h2>
+                        <h2 class="summary-count mb-0">{{ $active_orders }}</h2>
                         <i class="summary-icon fa fa-edit ml-auto"></i>
                     </div>
 
@@ -49,7 +49,7 @@
 
                 <div class="card-body">
                     <div class="d-flex align-items-center mb-3">
-                        <h2 class="summary-count mb-0">5</h2>
+                        <h2 class="summary-count mb-0">{{ $completed_orders }}</h2>
                         <i class="summary-icon fa fa-check ml-auto"></i>
                     </div>
 
@@ -66,9 +66,16 @@
         <div class="d-sm-flex align-items-sm-center mb-3">
             <h4 class="mb-sm-0">Recent Notifications</h4>
 
-            <a href="" class="ml-sm-auto btn btn-outline-primary btn-sm">View All</a>
+            <a href="{{ route('client.notifications') }}" class="ml-sm-auto btn btn-outline-primary btn-sm">View All</a>
         </div>
 
+        @if(count($notifications) == 0)
+        <p class="lead">
+            There is nothing to bring to your attention at the moment. You shall see your most recent notifications here
+        </p>
+        @endif
+
+        @foreach($notifications as $notification)
         <div class="notification">
             <a href="" class="link"></a>
 
@@ -89,48 +96,7 @@
                 </div>
             </div>
         </div>
-
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
+        @endforeach
 
     </div>
 
