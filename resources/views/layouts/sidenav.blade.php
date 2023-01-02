@@ -1,4 +1,4 @@
-<aside class="sidenav d-lg-block d-none px-lg-4" id="sidenav" onclick="if(event.target == this){ this.classList.remove('open') }">
+<aside class="sidenav px-lg-4" id="sidenav" onclick="if(event.target == this){ this.classList.remove('open') }">
     <div>
         <div class="text-center mb-4">
             <div><strong>{{ $user->name }}</strong>

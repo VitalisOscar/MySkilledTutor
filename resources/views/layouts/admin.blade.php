@@ -89,13 +89,6 @@
                                     <span class="nav-link-text">View Orders</span>
                                 </a>
                             </li>
-
-                            <li class="nav-item">
-                                <a class="nav-link @if($current_route->getName() == 'admin.screens.all'){{ __('active') }}@endif " href="">
-                                    <i class="fa fa-coins text-info"></i>
-                                    <span class="nav-link-text">Order Pricing</span>
-                                </a>
-                            </li>
                         </ul>
 
                         <h4 class="sidebar-heading text-muted">Clients</h4>

@@ -2,7 +2,6 @@
 
 @section('links')
     <link href="{{ asset('static/css/pages/client_area.css') }}" rel="stylesheet">
-
     @yield('more_links')
 @endsection
 

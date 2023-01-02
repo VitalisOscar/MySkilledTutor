@@ -112,3 +112,86 @@ body{
         margin-left: 300px;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    display: block;
+    overflow-y: auto;
+    width: 100%;
+    max-width: 250px;
+    padding-right: 0;
+    padding-left: 0;
+    background: #fff;
+    box-shadow: 3px 0 3px 0 rgba(0,0,0,.05);;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar-header{
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+.sidebar-header .logo, .logo-on-sm .logo {
+    height: 50px;
+}
+
+.page-content{
+    margin-left: 250px;
+    min-height: 80vh;
+}
+
+.menu-button{
+    display: none;
+    cursor: pointer;
+}
+
+@media(max-width: 767px){
+    .page-content{
+        margin-left: 0px;
+    }
+
+    .sidenav{
+        left: -260px;
+        transition: .3s all !important;
+    }
+
+    .sidenav.open{
+        left: 0px;
+    }
+
+    .menu-button{
+        display: block;
+    }
+}
+
+
+@media(max-width: 300px){
+    .sidenav{
+        width: 100% !important;
+        max-width: 100% !important;
+        box-shadow: none;
+    }
+
+    .sidenav:not(.open){
+        left: -100%;
+    }
+} */
+
