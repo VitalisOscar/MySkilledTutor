@@ -16,7 +16,7 @@
     <div class="row">
         <div class="col-lg-10 col-xl-9">
 
-            <div class="statuses mb-4">
+            <div class="statuses mb-4" style="overflow-x: auto">
                 <a href="{{ route('client.orders.all', 'active') }}" @if($status == 'active')class="active" @endif>Active</a>
                 <a href="{{ route('client.orders.all', 'pending') }}" @if($status == 'pending')class="active" @endif>Pending</a>
                 <a href="{{ route('client.orders.all', 'completed') }}" @if($status == 'completed')class="active" @endif>Completed</a>
