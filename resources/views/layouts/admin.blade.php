@@ -14,8 +14,8 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{ asset('static/css/main.css') }}">
-    <link rel="stylesheet" href="{{ asset('static/css/admin.css') }}">
+    <link rel="stylesheet" href="{{ asset('static/css/main.css?v='.$asset_version) }}">
+    <link rel="stylesheet" href="{{ asset('static/css/admin.css?v='.$asset_version) }}">
 
     @yield('links')
 </head>

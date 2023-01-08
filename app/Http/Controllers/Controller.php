@@ -19,6 +19,7 @@ class Controller extends BaseController
 
         // Add the current route
         $data['current_route'] = Route::current();
+        $data['asset_version'] = config('site.asset_version');
 
         return response()->view($view, $data);
     }

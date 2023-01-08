@@ -3,7 +3,7 @@
 @section('title', 'Create Order')
 
 @section('more_links')
-    <link href="{{ asset('static/css/pages/new_order.css') }}" rel="stylesheet">
+    <link href="{{ asset('static/css/pages/new_order.css?v='.$asset_version) }}" rel="stylesheet">
 @endsection
 
 @section('page_content')

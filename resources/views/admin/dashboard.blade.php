@@ -7,8 +7,8 @@
 @endsection
 
 @section('links')
-    <link href="{{ asset('static/css/pages/dashboard.css') }}" rel="stylesheet">
-    <link href="{{ asset('static/css/pages/orders.css') }}" rel="stylesheet">
+    <link href="{{ asset('static/css/pages/dashboard.css?v='.$asset_version) }}" rel="stylesheet">
+    <link href="{{ asset('static/css/pages/orders.css?v='.$asset_version) }}" rel="stylesheet">
 @endsection
 
 @section('content')

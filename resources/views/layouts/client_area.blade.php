@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('links')
-    <link href="{{ asset('static/css/pages/client_area.css') }}" rel="stylesheet">
+    <link href="{{ asset('static/css/pages/client_area.css?v='.$asset_version) }}" rel="stylesheet">
     @yield('more_links')
 @endsection
 

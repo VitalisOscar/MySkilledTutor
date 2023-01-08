@@ -3,7 +3,7 @@
 @section('title', 'Your Orders')
 
 @section('more_links')
-<link rel="stylesheet" href="{{ asset('static/css/pages/orders.css') }}">
+<link rel="stylesheet" href="{{ asset('static/css/pages/orders.css?v='.$asset_version) }}">
 @endsection
 
 @section('page_content')
