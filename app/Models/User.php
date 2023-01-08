@@ -59,6 +59,12 @@ class User extends Authenticatable
     }
 
 
+    // Scopes
+    function scopeVerified($q){
+        $q->whereNotNull('email_verified_at');
+    }
+
+
     // Accessors
     public function getFmtCreatedAtAttribute(){
         return $this->created_at->diffForHumans();
