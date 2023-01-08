@@ -1,4 +1,4 @@
-<aside class="sidebar sidenav px-lg-4" id="sidenav" onclick="if(event.target == this){ this.classList.remove('open') }">
+<aside class="sidebar sidenav" id="sidenav" onclick="if(event.target == this){ this.classList.remove('open') }">
     <div class="sidebar-inner">
         <div class="text-center mb-4">
             <div><strong>{{ $user->name }}</strong>

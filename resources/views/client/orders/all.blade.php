@@ -28,7 +28,7 @@
                 <span class="info-icon fa fa-info-circle"></span>
 
                 <span class="text">
-                    Active orders are those that are currently being worked on by a writer.
+                    Active orders are those that are currently being worked on by a tutor.
                 </span>
             </p>
             @elseif($status == 'completed')
@@ -36,7 +36,7 @@
                 <span class="info-icon fa fa-info-circle"></span>
 
                 <span class="text">
-                    Completed orders are those that have been worked on by the writer and the answer submitted to you
+                    Completed orders are those that have been worked on by the tutor and the answer submitted to you
                 </span>
             </p>
             @elseif($status == 'pending')
@@ -52,7 +52,7 @@
                 <span class="info-icon fa fa-info-circle"></span>
 
                 <span class="text">
-                    Cancelled orders are those which were cancelled or payment failed.
+                    These are orders that have been cancelled and were not worked on to completion.
                 </span>
             </p>
             @endif

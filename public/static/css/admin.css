@@ -93,7 +93,7 @@ body{
     font-weight: 500 !important;
 }
 
-.nav-link.active{
+.sidebar .nav-link.active{
     background: #f5365c20;
     color: rgba(0,0,0,.9) !important;
 }

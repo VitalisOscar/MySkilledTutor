@@ -11,14 +11,11 @@ class OrderCancelledNotification extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $order;
+
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -41,9 +38,11 @@ class OrderCancelledNotification extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+            ->subject('Order Cancelled - '.$this->order->title)
+            ->view('emails.order_status_change', [
+                'user' => $this->order->user,
+                'order' => $this->order,
+            ]);
     }
 
     /**

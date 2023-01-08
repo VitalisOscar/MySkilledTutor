@@ -89,6 +89,8 @@ class SingleOrderController extends Controller
                 }
             }
 
+            $orderWasAlreadyCompleted = $order->isCompleted();
+
             // If order was marked complete
             if($request->boolean('complete')){
                 $order->update([
@@ -96,7 +98,9 @@ class SingleOrderController extends Controller
                     'completed_at' => now()
                 ]);
 
-                OrderCompletedEvent::dispatch($order);
+                if(!$orderWasAlreadyCompleted){
+                    OrderCompletedEvent::dispatch($order);
+                }
             }else{
                 NewMessageEvent::dispatch($message);
             }

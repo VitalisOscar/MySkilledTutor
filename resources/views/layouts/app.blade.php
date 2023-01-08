@@ -52,7 +52,7 @@
         </script>
     </div>
 
-    <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
+    <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom sticky-top">
         <div class="container-fluid">
             <button class="navbar-toggler menu-button mr-3" onclick="$('.sidebar').toggleClass('open')">
                 <span class="fa fa-bars"></span>
