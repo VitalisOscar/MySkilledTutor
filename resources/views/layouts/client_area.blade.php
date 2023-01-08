@@ -7,26 +7,26 @@
 
 @section('content')
 
-<div class="container-fluid py-5">
+{{-- <div class="container-fluid py-5">
 
-    <div class="row">
+    < class="row"> --}}
 
         {{-- Sidenav --}}
-        <div class="col-lg-3">
-            @include('layouts.sidenav')
-        </div>
+        @include('layouts.sidenav')
 
         {{-- Main content --}}
-        <div class="col-lg-9 px-md-4 px-lg-5">
+        <div class="main-content px-4 px-lg-5 py-4 py-lg-5">
 
-            @yield('page_content')
+            <div class="container-fluid">
+                @yield('page_content')
+            </div>
 
         </div>
         {{-- End Main content --}}
 
-    </div>
+    {{-- </div>
 
-</div>
+</div> --}}
 
 @endsection
 

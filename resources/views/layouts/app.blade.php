@@ -54,13 +54,13 @@
 
     <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom">
         <div class="container-fluid">
-            <a class="navbar-brand" href="{{ url('/') }}">
+            <button class="navbar-toggler menu-button mr-3" onclick="$('.sidebar').toggleClass('open')">
+                <span class="fa fa-bars"></span>
+            </button>
+
+            <a class="navbar-brand mr-auto" href="{{ url('/') }}">
                 <img class="app-logo" src="{{ asset('static/img/logo.png') }}" alt="{{ config('app.name') }}" >
             </a>
-
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" aria-expanded="false">
-                <span class="navbar-toggler-icon"></span>
-            </button>
 
             <div class="collapse navbar-collapse" id="menu">
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use App\Notifications\VerifyEmailNotification;
 use App\Rules\CorrectPassword;
 use App\Traits\CreatesVerificationCodes;
 use Exception;
@@ -120,6 +122,6 @@ class UserAccountController extends Controller
         $validity = config('auth.verification_code_validity');
         $code = $this->getVerificationCode($user, 'verification', $validity);
 
-        Storage::put('code', $code);
+        $user->notify(new VerifyEmailNotification($user, $code, $validity));
     }
 }

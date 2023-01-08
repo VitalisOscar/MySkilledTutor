@@ -25,7 +25,9 @@ Route::prefix('auth')
     Route::get('verification', [UserAccountController::class, 'verifyEmail'])->name('verify_email');
     Route::post('verification', [UserAccountController::class, 'verifyEmail'])->name('verify_email');
 
-    Route::post('verification/get-code', [UserAccountController::class, 'resendVerificationCode'])->name('get_verification_code');
+    Route::post('verification/get-code', [UserAccountController::class, 'resendVerificationCode'])
+        ->middleware('throttle:5,1')
+        ->name('get_verification_code');
 });
 
 // Client area
