@@ -264,3 +264,12 @@ body{
     margin: 0 8px;
 }
 
+
+/* Footer */
+footer {
+    background: #343a40
+}
+
+footer .list-unstyled a{color: #ddd}
+footer .list-unstyled a:hover{color: #fff}
+
