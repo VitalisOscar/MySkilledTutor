@@ -26,7 +26,7 @@ class OrderCompletedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -54,7 +54,9 @@ class OrderCompletedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'order_id' => $this->order->id,
+            'title' => 'Order Completed',
+            'message' => 'Your order '.$this->order->title.' has been completed. Open the order to view or download the final answer',
         ];
     }
 }

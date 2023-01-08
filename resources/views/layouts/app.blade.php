@@ -9,9 +9,6 @@
 
     <title>@yield('title', config('app.name'))</title>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
@@ -54,31 +51,24 @@
 
     <nav class="top-navbar navbar navbar-expand-md navbar-light border-bottom sticky-top">
         <div class="container-fluid">
-            <button class="navbar-toggler menu-button mr-3" onclick="$('.sidebar').toggleClass('open')">
+            @if(preg_match('/client/', $current_route->getName()))
+            <button class="navbar-toggler menu-button text-default mr-3" onclick="$('.sidebar').toggleClass('open')">
                 <span class="fa fa-bars"></span>
             </button>
+            @endif
 
             <a class="navbar-brand mr-auto" href="{{ url('/') }}">
                 <img class="app-logo" src="{{ asset('static/img/logo.png') }}" alt="{{ config('app.name') }}" >
             </a>
 
-            <div class="collapse navbar-collapse" id="menu">
-
-                <!-- Center Of Navbar -->
-                <ul class="navbar-nav mx-auto">
-                    <li class="nav-item">
-                        <a class="nav-link @if($current_route->getName() == 'landing'){{ __('active') }}@endif" href="{{ route('landing') }}">{{ __('Home') }}</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link @if(preg_match('/client./', $current_route->getName())){{ __('active') }}@endif " href="{{ route('client.dashboard') }}">{{ __('Client Area') }}</a>
-                    </li>
-                </ul>
-
-                <a class="btn btn-outline-danger btn-rounded px-4 shadow-none ml-auto" href="{{ route('client.orders.create') }}">
-                    <i class="fa fa-plus mr-2"></i>Make an Order
+            <div class="ml-auto">
+                <a class="d-none d-sm-inline-block btn btn-outline-danger btn-rounded px-4 shadow-none ml-auto" href="{{ route('client.orders.create') }}">
+                    <i class="fa fa-plus mr-2"></i>Make Order
                 </a>
 
+                <a class="d-sm-none btn btn-text text-default btn-rounded px-2 py-2 shadow-none ml-auto" href="{{ route('client.dashboard') }}">
+                    <i class="fa fa-user fa-sm mr-1"></i>User
+                </a>
             </div>
         </div>
     </nav>

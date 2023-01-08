@@ -15,7 +15,7 @@ class DashboardController extends Controller
             'all_orders' => $user->orders()->countable()->count(),
             'active_orders' => $user->orders()->active()->count(),
             'completed_orders' => $user->orders()->completed()->count(),
-            'notifications' => []
+            'notifications' => $user->notifications()->limit(3)->get(),
         ]);
     }
 }

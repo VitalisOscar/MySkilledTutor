@@ -77,7 +77,7 @@
 
         @foreach($notifications as $notification)
         <div class="notification">
-            <a href="" class="link"></a>
+            <a href="{{ route('client.orders.single', $notification->data['order_id']) }}" class="link"></a>
 
             <div class="d-flex align-items-center">
                 <span class="icon icon-shape bg-success text-white">
@@ -85,13 +85,12 @@
                 </span>
 
                 <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
+                    <h6 class="notification-title">{{ $notification->data['title'] }}</h6>
                     <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
+                        {{ $notification->data['message'] }}
                     </p>
                     <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
+                        <i class="fa fa-clock-o mr-2"></i>{{ $notification->created_at->diffForHumans() }}
                     </div>
                 </div>
             </div>

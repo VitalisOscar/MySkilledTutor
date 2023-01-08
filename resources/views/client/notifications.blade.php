@@ -9,67 +9,15 @@
 @section('page_content')
 <div>
 
-    {{-- New --}}
-    <div class="mb-4">
-        <div class="d-sm-flex align-items-sm-center mb-3">
-            <h5 class="mb-sm-0 heading">New Notifications</h5>
-
-            <button class="ml-sm-auto btn btn-outline-primary btn-sm">Mark All As Read</button>
-        </div>
-
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
-
+    <div class="d-sm-flex align-items-sm-center mb-3">
+        <h4 class="font-weight-600 mb-sm-0">Your Notifications</h4>
     </div>
 
+    <div class="mb-4">
 
-    {{-- Older --}}
-    <div>
-        <div class="d-sm-flex align-items-sm-center mb-3">
-            <h5 class="mb-sm-0 heading">Older</h5>
-        </div>
-
+        @foreach($notifications as $notification)
         <div class="notification">
-            <a href="" class="link"></a>
+            <a href="{{ route('client.orders.single', $notification->data['order_id']) }}" class="link"></a>
 
             <div class="d-flex align-items-center">
                 <span class="icon icon-shape bg-success text-white">
@@ -77,59 +25,23 @@
                 </span>
 
                 <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
+                    <h6 class="notification-title">{{ $notification->data['title'] }}</h6>
                     <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
+                        {{ $notification->data['message'] }}
                     </p>
                     <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
+                        <i class="fa fa-clock-o mr-2"></i>{{ $notification->created_at->diffForHumans() }}
                     </div>
                 </div>
             </div>
         </div>
+        @endforeach
 
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="notification">
-            <a href="" class="link"></a>
-
-            <div class="d-flex align-items-center">
-                <span class="icon icon-shape bg-success text-white">
-                    <i class="fa fa-bell"></i>
-                </span>
-
-                <div class="ml-3">
-                    <h6 class="notification-title">Assignment Submitted</h6>
-                    <p class="mb-1 notification-content">
-                        Your assignment 'A paper on traditional politics in African communities'
-                        has received a submission
-                    </p>
-                    <div class="text-muted">
-                        <i class="fa fa-clock-o mr-2"></i>Today 11:23
-                    </div>
-                </div>
-            </div>
-        </div>
+        @if($notifications->count() == 0)
+        <p class="lead">
+            There is nothing to bring to your attention at the moment. You shall see your recent and past notifications here
+        </p>
+        @endif
 
     </div>
 

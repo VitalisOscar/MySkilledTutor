@@ -26,7 +26,7 @@ class OrderFailedNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -54,7 +54,9 @@ class OrderFailedNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'order_id' => $this->order->id,
+            'title' => 'Order Failed',
+            'message' => 'Payment processing for your order '.$this->order->title.' has failed. Please try placing the order again.',
         ];
     }
 }

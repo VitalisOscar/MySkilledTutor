@@ -26,7 +26,7 @@ class OrderCancelledNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database'];
     }
 
     /**
@@ -54,7 +54,9 @@ class OrderCancelledNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'order_id' => $this->order->id,
+            'title' => 'Order Cancelled',
+            'message' => 'Your order '.$this->order->title.' has been cancelled. For any additional information, please contact support',
         ];
     }
 }
