@@ -21,6 +21,7 @@
                 <a href="{{ route('client.orders.all', 'pending') }}" @if($status == 'pending')class="active" @endif>Pending</a>
                 <a href="{{ route('client.orders.all', 'completed') }}" @if($status == 'completed')class="active" @endif>Completed</a>
                 <a href="{{ route('client.orders.all', 'cancelled') }}" @if($status == 'cancelled')class="active" @endif>Cancelled</a>
+                <a href="{{ route('client.orders.all', 'failed') }}" @if($status == 'failed')class="active" @endif>Failed</a>
             </div>
 
             @if($status == 'active')
@@ -53,6 +54,14 @@
 
                 <span class="text">
                     These are orders that have been cancelled and were not worked on to completion.
+                </span>
+            </p>
+            @elseif($status == 'failed')
+            <p class="info">
+                <span class="info-icon fa fa-info-circle"></span>
+
+                <span class="text">
+                    Failed orders are those you created but did not complete payment. You can click on one and retry payment again
                 </span>
             </p>
             @endif

@@ -72,6 +72,7 @@ Route::prefix('client')
         Route::get('{order}', SingleOrderController::class)->name('.single');
         Route::post('{order}/send-message', [SingleOrderController::class, 'sendMessage'])->name('.send_message');
 
+        Route::post('{order}/retry-payment', [SingleOrderController::class, 'retryPayment'])->name('.retry_payment');
 
         // Order Payments
         Route::prefix('payments')

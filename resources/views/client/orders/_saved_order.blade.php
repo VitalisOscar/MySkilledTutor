@@ -121,6 +121,22 @@
 </div>
 
 
+@if($order->didFail())
+<div class="info mb-4">
+    <i class="info-icon fa fa-info-circle"></i>
+    <div class="text">
+        <div>
+            Payment for this order was not completed and order cannot be done
+
+            <form action="{{ route('client.orders.retry_payment', $order) }}" method="post">
+                @csrf
+                <button class="btn btn-link py-2 px-0">Retry Payment</button>
+            </form>
+        </div>
+    </div>
+</div>
+@endif
+
 {{-- Order chat --}}
 {{-- Show this message for active or completed orders --}}
 @if($order->isActive() || $order->isCompleted())

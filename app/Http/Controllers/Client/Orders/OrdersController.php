@@ -18,6 +18,7 @@ class OrdersController extends Controller
         else if($status == 'active') $query->active();
         else if($status == 'cancelled') $query->cancelled();
         else if($status == 'draft') $query->draft();
+        else if($status == 'failed') $query->failed();
         else abort(404);
 
         return $this->view(

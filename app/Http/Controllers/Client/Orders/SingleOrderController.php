@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client\Orders;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +100,21 @@ class SingleOrderController extends Controller
                     'status' => 'An error occurred while sending the message. Please try again later.'
                 ]);
         }
+    }
+
+    function retryPayment($order){
+        if(!$order->didFail()){
+            return back()->withErrors([
+                'status' => 'Payment for this order cannot be retried'
+            ]);
+        }
+
+        // Make draft
+        $order->status = Order::STATUS_DRAFT;
+
+        $order->save();
+
+        return redirect()->route('client.orders.create.review', ['order' => $order]);
     }
 
     function getAttachment(Request $request, $order, $attachment, $message = null){
