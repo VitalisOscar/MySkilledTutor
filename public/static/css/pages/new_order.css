@@ -8,14 +8,14 @@
 }
 
 .wizard .wizard-step:before{
-    content: '';
+    /* content: '';
     position: absolute;
     bottom: 10px;
     top: 50px;
     left: 17px;
     width: 3px;
     z-index: 0;
-    border-left: 6px dotted #8988aa95;
+    border-left: 6px dotted #8988aa95; */
 }
 
 .wizard .wizard-step .wizard-step-header{
@@ -27,8 +27,8 @@
 }
 
 .wizard .wizard-step .wizard-step-header .wizard-step-header-indicator{
-    width: 40px;
-    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     border-radius: 50%;
     background: #172b4d;
     border: 2px solid #172b4d;
@@ -54,8 +54,7 @@
 }
 
 .wizard .wizard-step .wizard-step-content{
-    padding: 1.25rem 1.25rem 1.5rem;
-    margin-left: 40px;
+    padding: 1.25rem 0 1.5rem;
 }
 
 .wizard .wizard-step:not(.active) .wizard-step-content{

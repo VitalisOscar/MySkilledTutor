@@ -112,7 +112,7 @@ class CreateOrderController extends Controller
             foreach($request->file('attachments') as $file){
                 $order->attachments()->create([
                     'name' => $file->getClientOriginalName(),
-                    'path' => $file->store('attachments', 'public'),
+                    'path' => $file->store('attachments'),
                     'type' => $file->getMimeType(),
                 ]);
             }

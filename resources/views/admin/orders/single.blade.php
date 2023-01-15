@@ -101,16 +101,11 @@
                     <div class="row">
                         @foreach($order->attachments as $attachment)
                         <div class="col-6 col-sm-4 col-md-3 col-xl-2">
-                            <a title="{{ $attachment->name }}" href="{{ $attachment->url }}" class="attachment" target="_blank">
-                                {{-- If image, show an image preview, else, show a document icon --}}
-                                @if($attachment->isImage())
-                                <div class="preview d-flex">
-                                    <img src="{{ $attachment->url }}" alt="{{ $attachment->name }}">
-                                </div>
-                                @else
+                            <a title="{{ $attachment->name }}" href="{{ \Illuminate\Support\Facades\URL::temporarySignedRoute('get_attachment', now()->addMinutes(60), ['order' => $order, 'attachment' => $attachment]) }}" class="attachment" @if($attachment->isImage()) target="_blank" @endif >
                                 <div class="preview d-flex align-items-center justify-content-center">
-                                    {{-- May be pdf, word doc or zip file --}}
-                                    @if($attachment->isPdf())
+                                    @if($attachment->isImage())
+                                    <i class="preview-icon fa fa-image"></i>
+                                    @elseif($attachment->isPdf())
                                     <i class="preview-icon fa fa-file-pdf-o"></i>
                                     @elseif($attachment->isWordDoc())
                                     <i class="preview-icon fa fa-file-word-o"></i>
@@ -120,7 +115,6 @@
                                     <i class="preview-icon fa fa-file-o"></i>
                                     @endif
                                 </div>
-                                @endif
 
                                 <h6 class=" text-truncate px-3 py-2 mb-0">{{ $attachment->name }}</h6>
                             </a>

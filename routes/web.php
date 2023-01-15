@@ -32,7 +32,7 @@ Route::prefix('auth')
 
 // Client area
 Route::prefix('client')
-->middleware(['auth', 'verified_email'])
+->middleware(['auth:web', 'verified_email'])
 ->name('client')
 ->group(function(){
 
@@ -52,17 +52,22 @@ Route::prefix('client')
         Route::get('history/{status}', OrdersController::class)->name('.all');
 
         // Order creation
-        // Step 1
-        Route::get('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
-        Route::post('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
+        Route::middleware('order_status_draft')
+        ->group(function(){
 
-        // Step 2
-        Route::get('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
-        Route::post('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
+            // Step 1
+            Route::get('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
+            Route::post('create/{order?}', [CreateOrderController::class, 'start'])->name('.create');
 
-        // Step 3
-        Route::get('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
-        Route::post('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
+            // Step 2
+            Route::get('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
+            Route::post('create/{order}/requirements', [CreateOrderController::class, 'requirements'])->name('.create.requirements');
+
+            // Step 3
+            Route::get('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
+            Route::post('create/{order}/review', [CreateOrderController::class, 'review'])->name('.create.review');
+
+        });
 
         Route::get('{order}', SingleOrderController::class)->name('.single');
         Route::post('{order}/send-message', [SingleOrderController::class, 'sendMessage'])->name('.send_message');
@@ -79,6 +84,11 @@ Route::prefix('client')
 
     });
 });
+
+Route::get('attachment/{order}/{attachment}/{message?}', [SingleOrderController::class, 'getAttachment'])->name('get_attachment')
+    ->middleware('auth');
+Route::post('attachment/{order}/{attachment}/delete', [SingleOrderController::class, 'deleteAttachment'])->name('delete_attachment')
+    ->middleware('auth');
 
 // Admin
 require __DIR__.'/admin.php';

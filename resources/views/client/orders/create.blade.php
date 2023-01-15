@@ -3,6 +3,7 @@
 @section('title', 'Create Order')
 
 @section('more_links')
+    <link href="{{ asset('static/css/pages/orders.css?v='.$asset_version) }}" rel="stylesheet">
     <link href="{{ asset('static/css/pages/new_order.css?v='.$asset_version) }}" rel="stylesheet">
 @endsection
 
@@ -21,7 +22,7 @@
 
                 @csrf
 
-                <div class="wizard content-area">
+                <div class="wizard">
 
                     <div class="wizard-step @if($step == 'start'){{ __('active') }}@endif ">
 

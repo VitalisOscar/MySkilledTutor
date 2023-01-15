@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class SingleOrderController extends Controller
 {
@@ -69,7 +70,7 @@ class SingleOrderController extends Controller
                 foreach($request->file('attachments') as $file){
                     $attachment = $message->attachments()->create([
                         'name' => $file->getClientOriginalName(),
-                        'path' => $file->store('attachments/messages', 'public'),
+                        'path' => $file->store('attachments/messages'),
                         'type' => $file->getMimeType(),
                     ]);
 
@@ -98,5 +99,40 @@ class SingleOrderController extends Controller
                     'status' => 'An error occurred while sending the message. Please try again later.'
                 ]);
         }
+    }
+
+    function getAttachment(Request $request, $order, $attachment, $message = null){
+        if(!$request->hasValidSignature()){
+            return back()
+                ->withErrors([
+                    'status' => 'Url is expired or invalid. Please click the attachment link again'
+                ]);
+        }
+
+        // If image, return the url
+        if($attachment->isImage()){
+            return response()->file(storage_path('app/'.$attachment->path));
+        }
+
+        // Return file download response
+        return response()->download(storage_path('app/'.$attachment->path), $attachment->name);
+    }
+
+    function deleteAttachment($order, $attachment){
+        // Check auth
+        if($order->user_id == auth()->id()){
+            if($attachment->delete()){
+                Storage::delete(storage_path('app/'.$attachment->path));
+            }
+
+            return back()->with([
+                'status' => 'Attached file '.$attachment->name.' deleted'
+            ]);
+        }
+
+        // Return file download response
+        return back()->withErrors([
+            'status' => 'ATtached file not found'
+        ]);
     }
 }

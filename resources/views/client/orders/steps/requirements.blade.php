@@ -12,7 +12,7 @@
             </span>
         </div>
 
-        <input name="title" class="form-control" value="{{ old('title') ?? $order->title }}">
+        <input name="title" class="form-control" value="{{ old('title') ?? $order->title }}" required>
     </div>
 
     @error('title')
@@ -55,7 +55,12 @@
         @foreach ($order->attachments ?? [] as $attachment)
             <div class="d-flex align-items-center">
                 <a href="{{ $attachment->url }}" target="_blank">{{ $attachment->name }}</a>
-                <span class="ml-auto text-danger" data-toggle="tooltip" title="Remove attachment">
+
+                <form id="delete_attachment_{{ $attachment->id }}" action="{{ route('delete_attachment', ['order' => $order, 'attachment' => $attachment]) }}" method="post">
+                    @csrf
+                </form>
+
+                <span style="cursor: pointer" class="p-1 ml-auto text-danger" title="Delete attachment" onclick="if(confirm('Delete attachment {{ $attachment->name }}?')){document.querySelector('#delete_attachment_{{ $attachment->id }}').submit()}">
                     <i class="fa fa-times"></i>
                 </span>
             </div>
@@ -92,7 +97,7 @@
             </span>
         </div>
 
-        <select name="formatting" class="form-control">
+        <select name="formatting" class="form-control" required>
             <option value="">Select Formatting</option>
             @foreach ($formatting as $option)
                 <option value="{{ $option }}" @if(old('formatting') ?? $order->formatting == $option){{ __('selected') }}@endif>
@@ -117,11 +122,11 @@
     <div class="input-group">
         <div class="input-group-prepend">
             <span class="input-group-text">
-                <i class="fa fa-layers"></i>
+                <i class="fa fa-file-o"></i>
             </span>
         </div>
 
-        <input name="pages" class="form-control" placeholder="Pages" value="{{ old('pages') ?? $order->pages }}">
+        <input name="pages" class="form-control" placeholder="Pages" value="{{ old('pages') ?? $order->pages }}" required>
     </div>
 
     @error('pages')
@@ -164,7 +169,7 @@
 
         @endphp
 
-        <input name="urgency" class="form-control" placeholder="e.g 4" value="{{ $urgency }}">
+        <input name="urgency" class="form-control" placeholder="e.g 4" value="{{ $urgency }}" required>
 
         <select name="urgency_type" class="form-control">
             <option value="days" @if($urgency_type == 'days'){{ __('selected') }}@endif>

@@ -73,7 +73,7 @@ class SingleOrderController extends Controller
                 foreach($request->file('attachments') as $file){
                     $attachment = $message->attachments()->create([
                         'name' => $file->getClientOriginalName(),
-                        'path' => $file->store('attachments/messages', 'public'),
+                        'path' => $file->store('attachments/messages'),
                         'type' => $file->getMimeType(),
                     ]);
 
