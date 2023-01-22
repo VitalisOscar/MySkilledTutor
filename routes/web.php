@@ -87,9 +87,9 @@ Route::prefix('client')
 });
 
 Route::get('attachment/{order}/{attachment}/{message?}', [SingleOrderController::class, 'getAttachment'])->name('get_attachment')
-    ->middleware('auth');
+    ->middleware('auth:web,admin');
 Route::post('attachment/{order}/{attachment}/delete', [SingleOrderController::class, 'deleteAttachment'])->name('delete_attachment')
-    ->middleware('auth');
+    ->middleware('auth:web,admin');
 
 // Admin
 require __DIR__.'/admin.php';

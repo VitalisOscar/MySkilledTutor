@@ -62,7 +62,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function bindRouteParams(){
         Route::bind('order', function($value){
             // Admin route
-            if(request()->is('admin/orders*') && auth('admin')->check()){
+            if(request()->is('admin/orders*') || auth('admin')->check()){
                 return Order::where('id', $value)->firstOrFail();
             }
 
@@ -81,7 +81,7 @@ class RouteServiceProvider extends ServiceProvider
             $order = Route::current()->parameter('order');
 
             // Admin accessing the route
-            if(request()->is('admin*') && auth('admin')->check()){
+            if(request()->is('admin*') || auth('admin')->check()){
                 if($order){
                     return $order->messages()
                         ->where('id', $value)
