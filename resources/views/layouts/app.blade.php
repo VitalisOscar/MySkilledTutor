@@ -67,7 +67,7 @@
                 </a>
 
                 <a class="d-sm-none btn btn-text text-default btn-rounded px-2 py-2 shadow-none ml-auto" href="{{ route('client.dashboard') }}">
-                    <i class="fa fa-user fa-sm mr-1"></i>User
+                    <i class="fa fa-user fa-sm mr-1"></i>{{ auth('web')->check() ? 'User':'Log In' }}
                 </a>
             </div>
         </div>
