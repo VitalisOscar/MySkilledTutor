@@ -1,65 +1,106 @@
 @extends('layouts.app')
 
+@section('links')
+<link rel="stylesheet" href="{{ asset('static/css/auth.css') }}" />
+@endsection
+
+@section('title', 'Reset password')
+
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
+<section class="py-4 py-md-5">
+    <div class="container">
 
-                <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
-                        @csrf
+        <div class="row">
 
-                        <input type="hidden" name="token" value="{{ $token }}">
+            <div class="col main-content">
 
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+                <form class="auth-form" method="POST" action="{{ route('password.update') }}">
+                    @csrf
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" autofocus>
+                    <input type="hidden" name="token" value="{{ $token }}">
 
+                    <div class="mb-4 text-center">
+                        <h4 class="mb-0">Reset Password</h4>
+
+                        <h6>{{ $email ?? old('email') }}</h6>
+                    </div>
+
+                    <div class="auth-card border mb-4">
+
+                        <div class="p-4">
+
+                            <div class="form-group d-none mb-3">
+                                <label>Your Email</label>
+                                <div class="input-group bg-white">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-fw fa-envelope"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control" name="email" placeholder="Email Address" value="{{ $email ?? old('email') }}" type="email" required />
+                                </div>
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
-
+                            <div class="form-group mb-4">
+                                <label>New Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-fw fa-lock"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control rounded-0" placeholder="New Password" name="password" id="password" type="password" value="{{ old('password') }}" required />
+                                    <div class="input-group-append pass-toggle">
+                                        <span class="input-group-text" onclick="togglePassword('password', this)">
+                                            <i class="fa fa-fw fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                    <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
-                        </div>
 
-                        <div class="row mb-3">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            <div class="form-group mb-4">
+                                <label>Confirm Password</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <i class="fa fa-fw fa-lock"></i>
+                                        </span>
+                                    </div>
+                                    <input class="form-control rounded-0" placeholder="Confirm Password" name="password_confirmation" id="password_confirmation" type="password" value="{{ old('password_confirmation') }}" required />
+                                    <div class="input-group-append pass-toggle">
+                                        <span class="input-group-text" onclick="togglePassword('password_confirmation', this)">
+                                            <i class="fa fa-fw fa-eye"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                @error('password_confirmation')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
                             </div>
+
+                            <div>
+                                <button class="btn btn-danger btn-block shadow-none">Save Password</button>
+                            </div>
+
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Reset Password') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <a href="{{ route('login') }}">Back to login</a></span>
+                    </div>
+
+                </form>
+
             </div>
+
         </div>
     </div>
-</div>
+</section>
 @endsection
