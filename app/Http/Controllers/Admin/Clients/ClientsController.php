@@ -9,12 +9,14 @@ use Illuminate\Http\Request;
 class ClientsController extends Controller
 {
     function __invoke(){
-        $query = User::withCount('countable_orders');
+        $query = User::verified()->withCount('countable_orders');
 
         // Filter by name or email
         if($search = request()->get('search')){
-            $query->where('name', 'like', "%{$search}%")
-                ->orWhere('email', 'like', "%{$search}%");
+            $query->where(function($q) use($search){
+                $query->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
         }
 
         // Ordering
