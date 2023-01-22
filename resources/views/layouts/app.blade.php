@@ -203,6 +203,24 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script>
+        function togglePassword(fieldId, trigger){
+            var passwordField = document.querySelector('#'+fieldId);
+
+            if(passwordField != undefined){
+                if(passwordField.type == 'password'){
+                    passwordField.type = 'text';
+                    trigger.querySelector('i').classList.remove('fa-eye')
+                    trigger.querySelector('i').classList.add('fa-eye-slash')
+                }else{
+                    passwordField.type = 'password';
+                    trigger.querySelector('i').classList.add('fa-eye')
+                    trigger.querySelector('i').classList.remove('fa-eye-slash')
+                }
+            }
+        }
+    </script>
+
     {{-- Any additional scripts --}}
     @yield('scripts')
 </body>

@@ -69,9 +69,9 @@
                                             <i class="fa fa-fw fa-lock"></i>
                                         </span>
                                     </div>
-                                    <input class="form-control rounded-0" value="{{ old('password') }}" name="password" type="password" required />
+                                    <input class="form-control rounded-0" value="{{ old('password') }}" id="password" name="password" type="password" required />
                                     <div class="input-group-append pass-toggle">
-                                        <span class="input-group-text">
+                                        <span class="input-group-text" onclick="togglePassword('password', this)">
                                             <i class="fa fa-fw fa-eye"></i>
                                         </span>
                                     </div>
