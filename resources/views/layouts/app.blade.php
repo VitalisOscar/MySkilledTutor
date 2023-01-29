@@ -61,6 +61,9 @@
                 <img class="app-logo" src="{{ asset('static/img/logo.png') }}" alt="{{ config('app.name') }}" >
             </a>
 
+            {{-- <a href="{{ route('faqs') }}" class="nav-link">FAQ</a>
+            <a href="" class="nav-link">Contact Us</a> --}}
+
             <div class="ml-auto">
                 <a class="d-none d-sm-inline-block btn btn-outline-danger btn-rounded px-4 shadow-none ml-auto" href="{{ route('client.orders.create') }}">
                     <i class="fa fa-plus mr-2"></i>Make Order
@@ -167,12 +170,12 @@
                                             Some Place
                                         </a>
                                     </li> --}}
-                                    <li class="px-1 mb-2">
+                                    {{-- <li class="px-1 mb-2">
                                         <a href="tel:+254790210091">
                                             <i class="fa fa-fw fa-phone mr-2 text-success"></i>
                                             {{ config('site.contact_phone') }}
                                         </a>
-                                    </li>
+                                    </li> --}}
                                     <li class="px-1">
                                         <a href="mailto:info@automanual.co.ke">
                                             <i class="fa fa-fw fa-envelope mr-2 text-warning"></i>
