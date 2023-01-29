@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Route;
 // Front routes
 Route::get('/', [FrontController::class, 'landing'])->name('landing');
 
+Route::get('/frequently-asked-questions', [FrontController::class, 'faqs'])->name('faqs');
+
 
 // Client routes
 

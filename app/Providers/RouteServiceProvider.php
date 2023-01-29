@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Attachment;
+use App\Models\Faq;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
@@ -60,6 +61,15 @@ class RouteServiceProvider extends ServiceProvider
      * @return void
      */
     protected function bindRouteParams(){
+        Route::bind('faq', function($value){
+            // Admin route
+            if(request()->is('admin/faq*') || auth('admin')->check()){
+                return Faq::where('id', $value)->firstOrFail();
+            }
+
+            return null;
+        });
+
         Route::bind('order', function($value){
             // Admin route
             if(request()->is('admin/orders*') || auth('admin')->check()){

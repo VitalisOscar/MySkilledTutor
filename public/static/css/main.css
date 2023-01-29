@@ -265,6 +265,12 @@ body{
 }
 
 
+
+/* Faq */
+.faq .faq-question{
+    cursor: pointer;
+}
+
 /* Footer */
 footer {
     background: #343a40

@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             AcademicLevelSeeder::class,
             SubjectSeeder::class,
             AdminSeeder::class,
+            FaqSeeder::class,
         ]);
     }
 }

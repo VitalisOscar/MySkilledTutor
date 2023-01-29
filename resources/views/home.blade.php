@@ -29,7 +29,7 @@
                         </p>
 
                         <a href="{{ route('client.orders.create') }}" class="btn btn-danger px-3 shadow-none">Get Started</a>
-                        <a href="" class="btn btn-outline-default px-3 shadow-none"><i class="fa fa-calculator mr-2 text-danger"></i>Price Calculator</a>
+                        <button class="btn btn-link px-3 shadow-none" onclick="document.querySelector('.why-us-start').scrollIntoView({behavior: 'smooth'})">Learn More</but>
 
                     </div>
 
@@ -49,7 +49,7 @@
         <div class="container">
             <div class="row d-flex align-items-center">
                 <div class="col-lg-4">
-                    <img class="why-us-context-img" src="{{ asset('static/img/home/why-us-image.png') }}" alt="Student assignment">
+                    <img class="why-us-context-img" src="{{ asset('static/img/home/image2.png') }}" alt="Student assignment">
                 </div>
 
                 <div class="col-lg-8">
@@ -57,7 +57,7 @@
                     {{-- CONTENT --}}
                     <div class="row">
 
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-6 mb-4 why-us-start">
                             <div class="why-us-item text-center">
                                 <div class="mb-3">
                                     <img class="why-us-img" src="{{ asset('static/img/icons/timely.png') }}" alt="Speedy Delivery">
@@ -131,7 +131,7 @@
         </div>
     </section>
 
-    <section class="section section-shaped calculator-section py-5">
+    {{-- <section class="section section-shaped calculator-section py-5">
 
         <div class="shape shape-style-1 bg-white">
             <span class="span-50"></span>
@@ -204,7 +204,74 @@
             </form>
 
         </div>
+    </section> --}}
+
+    <section class="section section-shaped py-5">
+
+        <div class="shape shape-style-1 bg-white">
+            <span class="span-50"></span>
+            <span class="span-150"></span>
+            <span class="span-150"></span>
+            <span class="span-50"></span>
+            <span class="span-50"></span>
+            <span class="span-200"></span>
+            <span class="span-100"></span>
+            <span class="span-50"></span>
+            <span class="span-100"></span>
+            <span class="span-150"></span>
+        </div>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-6 col-lg-4">
+                    <div>
+
+                        <img class="icon mb-3" src="{{ asset('static/img/icons/tutor.png') }}" alt="">
+
+                        <h4 class="font-weight-600">Tutoring Services</h4>
+
+                        <p>
+                            We offer quality professional tutoring services for all business related subjects. Get in touch with us to request this service
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div>
+
+                        <img class="icon mb-3" src="{{ asset('static/img/icons/help.png') }}" alt="">
+
+                        <h4 class="font-weight-600">Assignment Help</h4>
+
+                        <p>
+                            We advise clients on how to address assignment questiont. We share outlines and guidance on how to handle the assignment problem
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div>
+
+                        <img class="icon mb-3" src="{{ asset('static/img/icons/formating.png') }}" alt="">
+
+                        <h4 class="font-weight-600">Formatting Guide</h4>
+
+                        <p>
+                            We provide guidelines on all paper formatting styles such as APA, MLA, Chicago among others
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
     </section>
+
 
     <section class="section numbers py-5">
         <div class="container">

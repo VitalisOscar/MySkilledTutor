@@ -60,11 +60,9 @@
             <a class="navbar-brand mr-auto" href="{{ url('/') }}">
                 <img class="app-logo" src="{{ asset('static/img/logo.png') }}" alt="{{ config('app.name') }}" >
             </a>
+            <div class="d-flex align-items-center ml-auto">
+                <a href="{{ route('faqs') }}" class="nav-link mr-sm-3">FAQ</a>
 
-            {{-- <a href="{{ route('faqs') }}" class="nav-link">FAQ</a>
-            <a href="" class="nav-link">Contact Us</a> --}}
-
-            <div class="ml-auto">
                 <a class="d-none d-sm-inline-block btn btn-outline-danger btn-rounded px-4 shadow-none ml-auto" href="{{ route('client.orders.create') }}">
                     <i class="fa fa-plus mr-2"></i>Make Order
                 </a>

@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Clients\ClientsController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\FaqsController;
 use App\Http\Controllers\Admin\Orders\SingleOrderController;
 use App\Http\Controllers\Admin\Orders\ViewOrdersController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,23 @@ Route::prefix('admin')
         Route::post('{order}/cancel', [SingleOrderController::class, 'cancel'])->name('.cancel');
 
     });
+
+        // FAQs
+        Route::prefix('faqs')
+        ->name('.faqs')
+        ->group(function(){
+
+            Route::get('', [FaqsController::class, 'all'])->name('.all');
+
+            Route::get('add', [FaqsController::class, 'add'])->name('.create');
+            Route::post('add', [FaqsController::class, 'add'])->name('.create');
+
+            Route::get('{faq}', [FaqsController::class, 'update'])->name('.update');
+            Route::post('{faq}', [FaqsController::class, 'update'])->name('.update');
+
+            Route::delete('{faq}', [FaqsController::class, 'delete'])->name('.delete');
+
+        });
 
     // Clients
     Route::prefix('clients')

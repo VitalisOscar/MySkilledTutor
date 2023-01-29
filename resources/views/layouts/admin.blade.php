@@ -106,6 +106,13 @@
 
                         <ul class="navbar-nav mb-4">
                             <li class="nav-item">
+                                <a class="nav-link @if(preg_match('/admin.faqs/', $current_route->getName())){{ __('active') }}@endif" href="{{ route('admin.faqs.all') }}">
+                                    <i class="fa fa-question-circle text-danger"></i>
+                                    <span class="nav-link-text">Site FAQs</span>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link @if($current_route->getName() == 'admin.auth.password'){{ __('active') }}@endif" href="{{ route('admin.auth.password') }}">
                                     <i class="fa fa-lock text-muted"></i>
                                     <span class="nav-link-text">Update Password</span>
