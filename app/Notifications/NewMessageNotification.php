@@ -11,14 +11,11 @@ class NewMessageNotification extends Notification
 {
     use Queueable;
 
-    /**
-     * Create a new notification instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public $order;
+
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -29,21 +26,7 @@ class NewMessageNotification extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
-    }
-
-    /**
-     * Get the mail representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @return \Illuminate\Notifications\Messages\MailMessage
-     */
-    public function toMail($notifiable)
-    {
-        return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+        return ['database'];
     }
 
     /**
@@ -55,7 +38,9 @@ class NewMessageNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+            'order_id' => $this->order->id,
+            'title' => 'New Message from tutor',
+            'message' => 'You have a new message for the order '.$this->order->title.'. Open the order to view messages from the tutor',
         ];
     }
 }
