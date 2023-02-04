@@ -27,7 +27,7 @@
                             </div>
 
                             <div class="col-sm-9 col-md-12 col-lg-8">
-                                <input class="form-control" value="John Doe" disabled>
+                                <input class="form-control" value="{{ $user->name }}" disabled>
                             </div>
                         </div>
                     </div>
@@ -39,7 +39,7 @@
                             </div>
 
                             <div class="col-sm-9 col-md-12 col-lg-8">
-                                <input class="form-control" value="john@gmail.com" disabled>
+                                <input class="form-control" value="{{ $user->email }}" disabled>
                             </div>
                         </div>
                     </div>
