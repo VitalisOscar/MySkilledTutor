@@ -5,7 +5,7 @@
 
     <div class="ml-sm-3">
         @if($order->isActive())
-        @if($order->isAssigned())
+        {{-- @if($order->isAssigned())
         <strong class="small font-weight-700 text-success">
             ASSIGNED
         </strong>
@@ -13,7 +13,7 @@
         <strong class="small font-weight-700 text-danger">
             UNASSIGNED
         </strong>
-        @endif
+        @endif --}}
         @endif
 
         <h5 class="mb-2">

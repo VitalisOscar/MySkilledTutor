@@ -26,7 +26,20 @@ class ViewOrdersController extends Controller
         else if($status == 'active') $query->active();
         else if($status == 'cancelled') $query->cancelled();
         else if($status == 'draft') $query->draft();
-        else abort(404);
+        else if($status != 'search') abort(404);
+
+        if($status == 'search'){
+            if($request->filled('search')){
+                $query
+                    ->whereIn('status', [Order::STATUS_ACTIVE, Order::STATUS_COMPLETED, Order::STATUS_CANCELLED])
+                    ->where(function($q) use($request){
+                        $q->where('title', 'like', '%'.$request->get('search').'%')
+                            ->orWhere('order_number', 'like', '%'.$request->get('search').'%');
+                    });
+            }else{
+                return redirect()->route('admin.orders.all', 'active');
+            }
+        }
 
         return $this->view(
             'admin.orders.all',

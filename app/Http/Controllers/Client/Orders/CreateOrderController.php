@@ -43,7 +43,8 @@ class CreateOrderController extends Controller
                 'paper_type_id' => $request->post('paper_type'),
                 'academic_level_id' => $request->post('academic_level'),
                 'subject_id' => $request->post('subject'),
-                'status' => Order::STATUS_DRAFT
+                'status' => Order::STATUS_DRAFT,
+                'order_number' => time()
             ]);
         }else{
             $order->update([

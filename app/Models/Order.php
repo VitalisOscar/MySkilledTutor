@@ -48,7 +48,8 @@ class Order extends Model
         'paid_at',
         'cancelled_at',
         'completed_at',
-        'cancellation_reason'
+        'cancellation_reason',
+        'order_number'
     ];
 
     public $timestamps = true;

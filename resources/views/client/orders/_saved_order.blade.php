@@ -77,6 +77,16 @@
 </div>
 @endif
 
+@if($order->isActive() || $order->isCompleted() || $order->isCancelled())
+<div class="d-flex align-items-center my-3">
+    <strong class="font-weight-700">Order Ref:</strong>
+    <span class="ml-2" id="order_number">{{ $order->order_number }}</span>
+    <button onclick="copy('order_number')" class="ml-4 btn btn-text btn-sm px-2">
+        <i class="fa fa-copy mr-1"></i>Copy
+    </button>
+</div>
+@endif
+
 {{-- Order details --}}
 <div class="mb-3">
     <h5 class="heading mb-3">Instructions</h5>
